@@ -335,6 +335,52 @@ body{font-family:'Nunito',sans-serif;background:var(--white);color:var(--text);f
     justify-content:flex-start;
   }
 }
+
+/* ── DESKTOP: GLOBAL LAYOUT (≥900px) ──────────────────────────
+   Mobile CSS bleibt vollständig unverändert.
+   Revert: git checkout v1-mobile-hero -- heisshunger-quiz/lp/index.html
+──────────────────────────────────────────────────────────── */
+@media(min-width:900px){
+
+  /* HEADER */
+  .site-header{padding:14px 60px}
+
+  /* SECTIONS – breiterer Container & mehr Padding */
+  .inner{max-width:960px !important}
+  .section{padding:60px 48px}
+
+  /* MEDIA LOGOS – horizontale Reihe */
+  .media-logos{flex-direction:row;justify-content:center;align-items:center;gap:56px}
+  .media-logo{font-size:24px}
+
+  /* PLAN OPTIONS – zentriert & breiter */
+  .plan-options{max-width:640px;margin-left:auto;margin-right:auto}
+
+  /* STATS BOX – 2×2 Grid */
+  .stats-box{display:grid;grid-template-columns:1fr 1fr;gap:12px 20px}
+
+  /* CERTS GRID – 2 Spalten */
+  .cert-grid-wrapper{max-width:none !important;display:grid;grid-template-columns:1fr 1fr;gap:8px 48px}
+
+  /* GUARANTEE ITEMS – nebeneinander */
+  .guar-items{flex-direction:row;max-width:none;align-items:flex-start;gap:24px}
+  .guar-item{flex:1}
+
+  /* BUNDLE CARDS – 3 Spalten */
+  .bundle-cards-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;align-items:start}
+  .bundle-selector-card{margin-bottom:0}
+
+  /* TEAM – 2×2 Raster */
+  .team-wrapper{max-width:960px !important;display:grid;grid-template-columns:1fr 1fr;gap:0 56px}
+  .team-sep{grid-column:1/-1}
+  .team-member{padding-top:28px}
+
+  /* FAQ */
+  .faq-list{max-width:780px;margin-left:auto;margin-right:auto}
+
+  /* INGREDIENT GRID – Breite im größeren Container */
+  .ingredient-grid{max-width:none}
+}
 </style>
 </head>
 <body>
@@ -684,7 +730,7 @@ body{font-family:'Nunito',sans-serif;background:var(--white);color:var(--text);f
 <section class="section bg-white">
   <div class="inner">
     <h2 class="h2 h2-center">Probiere BrustBizeps' diätfreundliches Geschmackspulver noch heute!</h2>
-    <div style="max-width:400px;margin:0 auto;">
+    <div class="cert-grid-wrapper" style="max-width:400px;margin:0 auto;">
       <div class="cert-row"><div class="cert-icon">🌿</div><div class="cert-text">Vegan & glutenfrei</div></div>
       <div class="cert-row"><div class="cert-icon">🚫</div><div class="cert-text">Ohne Zucker & ohne künstliche Zusatzstoffe</div></div>
       <div class="cert-row"><div class="cert-icon">🇩🇪</div><div class="cert-text">Hergestellt in Deutschland – mit zertifizierten Partnern</div></div>
@@ -704,6 +750,7 @@ body{font-family:'Nunito',sans-serif;background:var(--white);color:var(--text);f
     <h2 class="h2 h2-center">Wähle deine Geschmäcker & Paketgröße</h2>
     <p class="subtext" style="text-align:center;">Stelle dir dein persönliches Geschmackserlebnis zusammen – alle Sorten 200g</p>
 
+    <div class="bundle-cards-grid">
     <!-- 2er-Set -->
     <div class="bundle-selector-card">
       <div class="bundle-header">
@@ -962,6 +1009,7 @@ body{font-family:'Nunito',sans-serif;background:var(--white);color:var(--text);f
         <p class="bundle-savings">Du sparst €44,75 + gratis Versand</p>
       </div>
     </div>
+    </div><!-- /bundle-cards-grid -->
 
   </div>
 </section>
@@ -1415,7 +1463,7 @@ function goToSlide(index) {
 <!-- MISSION + TEAM -->
 <div class="mission-stripe">BrustBizeps' Mission: 100.000 Frauen sollen Heißhunger auf Süßes auf natürliche Weise besiegen – ohne Verzicht, ohne Diätstress</div>
 <section class="section bg-white" style="padding-top:0;">
-  <div style="max-width:560px;margin:0 auto;">
+  <div class="team-wrapper" style="max-width:560px;margin:0 auto;">
     <div class="team-member">
        <img src="../../assets/sandra-mueller.jpeg" style="width:100%;border-radius:16px;height:240px;object-fit:cover;margin-bottom:16px;">
       <div class="team-name">Dr. Sarah Müller</div><div class="team-role">Ernährungswissenschaftlerin & Diätologin</div>
