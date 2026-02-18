@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bauchfett-Quiz | The Fit Protocol</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --purple: #6b4fbb;
+  --purple-dark: #5038a0;
+  --pink: #e8386d;
+  --pink-bg: #fdf0f5;
+  --text: #1a1a2e;
+  --text-muted: #6b6b8a;
+  --text-body: #3a3a5c;
+  --border: #e2ddf5;
+  --white: #ffffff;
+  --light-bg: #f8f6ff;
+}
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background: var(--white);
+  color: var(--text);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* HEADER */
+.header {
+  background: var(--white);
+  padding: 20px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+}
+
+.logo {
+  max-width: 100px;
+  height: auto;
+}
+
+/* HERO SECTION - KOMPAKT */
+.hero {
+  background: linear-gradient(135deg, var(--pink-bg) 0%, var(--light-bg) 100%);
+  padding: 24px 20px 32px; /* REDUZIERT von 40px/60px */
+  text-align: center;
+}
+
+.hero-img-container {
+  max-width: 600px;
+  margin: 0 auto 20px; /* REDUZIERT von 32px */
+}
+
+.hero-img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px; /* REDUZIERT von 16px */
+  box-shadow: 0 4px 16px rgba(107,79,187,0.12); /* REDUZIERT */
+}
+
+.hero-content {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.eyebrow {
+  font-size: 12px; /* REDUZIERT von 14px */
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--purple);
+  margin-bottom: 8px; /* REDUZIERT von 12px */
+}
+
+.hero h1 {
+  font-size: clamp(22px, 5.5vw, 42px); /* REDUZIERT Mobile-Size */
+  font-weight: 900;
+  line-height: 1.15; /* KOMPAKTER von 1.2 */
+  color: var(--text);
+  margin-bottom: 12px; /* REDUZIERT von 20px */
+}
+
+.hero-subtitle {
+  font-size: clamp(15px, 3.8vw, 20px); /* REDUZIERT */
+  font-weight: 700;
+  color: var(--text-body);
+  line-height: 1.4; /* KOMPAKTER von 1.5 */
+  margin-bottom: 8px; /* REDUZIERT von 12px */
+}
+
+.hero-body {
+  font-size: 14px; /* REDUZIERT von 16px */
+  color: var(--text-body);
+  line-height: 1.6; /* KOMPAKTER von 1.7 */
+  max-width: 600px;
+  margin: 0 auto 24px; /* REDUZIERT von 32px */
+}
+
+/* TYPEFORM/YOUFORM SECTION */
+.typeform-section {
+  background: var(--white);
+  padding: 0; /* KEIN padding mehr */
+  margin: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.typeform-container {
+  width: 100%;
+  max-width: 100%; /* Volle Breite auf Mobile */
+  margin: 0 auto;
+  min-height: 600px; /* REDUZIERT von 700px */
+  background: white;
+  border: none; /* Kein Border auf Mobile */
+  border-radius: 0; /* Keine Rundung auf Mobile */
+  box-shadow: none; /* Kein Shadow auf Mobile */
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+/* YouForm Embed Wrapper */
+.typeform-container [data-youform-embed] {
+  width: 100% !important;
+  min-height: 600px !important;
+  max-height: none !important; /* Kein max-height auf Mobile */
+  overflow-y: visible !important;
+  background: white;
+  padding: 20px; /* Minimal padding */
+}
+
+
+/* YouForm Iframe */
+.typeform-container iframe {
+  width: 100% !important;
+  min-height: 600px !important;
+  border: none !important;
+  display: block !important;
+}
+
+/* DISCLAIMER - höherer z-index */
+.disclaimer-section {
+  background: var(--light-bg);
+  padding: 48px 20px;
+  position: relative;
+  z-index: 100;
+  margin-top: 60px; /* Extra Abstand zum Form */
+}
+
+/* RESPONSIVE */
+@media (min-width: 768px) {
+  .typeform-section {
+    padding: 60px 20px 80px;
+  }
+  
+  .typeform-container {
+    min-height: 800px;
+    max-height: 85vh;
+  }
+  
+  .disclaimer-section {
+    padding: 60px 20px;
+    margin-top: 80px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .typeform-container {
+    max-width: 1000px;
+  }
+}
+
+/* DISCLAIMER SECTION */
+.disclaimer-section {
+  background: var(--light-bg);
+  padding: 48px 20px;
+  position: relative;
+  z-index: 100;
+  margin-top: 60px; /* Extra Abstand zum Form */
+}
+
+.disclaimer-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.disclaimer-logo {
+  max-width: 120px;
+  margin: 0 auto 24px;
+  display: block;
+}
+
+.disclaimer-title {
+  font-size: 18px;
+  font-weight: 900;
+  color: var(--text);
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.disclaimer-text {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.8;
+  margin-bottom: 12px;
+}
+
+.disclaimer-text strong {
+  font-weight: 800;
+  color: var(--text-body);
+}
+
+/* FOOTER */
+.footer {
+  background: var(--white);
+  padding: 24px 20px;
+  text-align: center;
+  border-top: 1px solid var(--border);
+}
+
+.footer-links {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.footer-links a {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover {
+  color: var(--purple);
+}
+
+/* RESPONSIVE */
+@media (min-width: 768px) {
+  .typeform-container {
+    height: 700px;
+  }
+  
+  .hero {
+    padding: 60px 20px 80px;
+  }
+  
+  .disclaimer-section {
+    padding: 60px 20px;
+    margin-top: 80px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .typeform-container {
+    height: 800px;
+  }
+}
+
+@media (min-width: 768px) {
+  .hero {
+    padding: 48px 20px 56px; /* Mehr auf Desktop */
+  }
+  
+  .hero h1 {
+    margin-bottom: 20px;
+  }
+  
+  .hero-body {
+    font-size: 16px;
+    margin-bottom: 32px;
+  }
+  
+  .typeform-section {
+    padding: 40px 20px; /* Padding wieder auf Desktop */
+  }
+  
+  .typeform-container {
+    max-width: 900px;
+    min-height: 700px;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(107,79,187,0.12);
+  }
+  
+  .typeform-container [data-youform-embed] {
+    min-height: 700px !important;
+    padding: 32px;
+  }
+  
+  .disclaimer-section {
+    padding: 48px 20px;
+    margin-top: 40px;
+  }
+  
+  .disclaimer-title {
+    font-size: 18px;
+  }
+  
+  .disclaimer-text {
+    font-size: 13px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .typeform-container {
+    max-width: 1000px;
+    min-height: 800px;
+  }
+  
+  .typeform-container [data-youform-embed] {
+    min-height: 800px !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <!-- Logo: Ersetze mit deinem Logo-Bild -->
+  <img src="/assets/logo.png" alt="The Fit Protocol" class="logo">
+  <!-- Falls kein Bild vorhanden, nutze Text: -->
+  <!-- <div style="font-size:28px;font-weight:900;color:var(--text);line-height:1.1;">The<br>Vitalist</div> -->
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="eyebrow">Abnehmen bei Frauen</div>
+    <h1>HEIßHUNGER <br>TROTZ DISZIPLIN?</h1>
+    <p class="hero-subtitle">Ein einziger biochemischer Mechanismus kann deinen Abnehmerfolg komplett sabotieren –</p>
+    <p class="hero-body">egal wie diszipliniert du bist oder wie wenig du isst. Finde jetzt heraus, ob dein Heißhunger biologisch gesteuert ist.</p>
+  </div>
+  
+  <!-- Optional: Hero Bild hier einfügen -->
+  <!-- <div class="hero-img-container">
+    <img src="/assets/quiz-hero.jpg" alt="Bauchfett Quiz" class="hero-img">
+  </div> -->
+</section>
+
+<!-- YOUFORM EMBED -->
+<section class="typeform-section">
+  <div class="typeform-container">
+
+<!-- <iframe src='https://app.youform.com/forms/jya879ql' loading='lazy' width='100%' height='700' frameborder='0' marginheight='0' marginwidth='0' style='border:none;'></iframe> -->
+<div data-youform-embed data-form='jya879ql' data-base-url='https://app.youform.com' data-width='100%' data-height='700'></div>
+<script src="https://app.youform.com/embed.js"></script>
+  </div>
+</section>
+
+<!-- DISCLAIMER -->
+<section class="disclaimer-section">
+  <div class="disclaimer-container">
+    <!-- Optional: Logo wiederholen -->
+    <!-- <img src="/assets/logo-vitalist-small.png" alt="The Vitalist" class="disclaimer-logo"> -->
+    
+    <h2 class="disclaimer-title">Rechtlicher Hinweis / Haftungsausschluss</h2>
+    
+    <p class="disclaimer-text">
+      Dieses Quiz dient ausschließlich allgemeinen Informationszwecken. Es stellt <strong>keine medizinische, therapeutische oder sonstige fachliche Beratung</strong> dar und ersetzt <strong>keinesfalls</strong> eine ärztliche Diagnose, Beratung oder Behandlung.
+    </p>
+    
+    <p class="disclaimer-text">
+      Die im Rahmen dieses Quiz bereitgestellten Inhalte, Ergebnisse und Hinweise beruhen auf allgemeinen Erfahrungswerten und vereinfachten Modellen. Sie sind <strong>nicht geeignet</strong>, individuelle gesundheitliche Situationen, Erkrankungen, Beschwerden oder Risiken zuverlässig zu beurteilen.
+    </p>
+    
+    <p class="disclaimer-text">
+      Es werden <strong>keine Diagnosen gestellt</strong>, <strong>keine Heilversprechen abgegeben</strong> und <strong>keine Behandlungsempfehlungen</strong> im medizinischen Sinne ausgesprochen.
+    </p>
+    
+    <p class="disclaimer-text">
+      Die Nutzung des Quiz erfolgt <strong>auf eigene Verantwortung</strong>. Eine Haftung für direkte oder indirekte Schäden materieller oder immaterieller Art, die durch die Nutzung oder Nichtnutzung der bereitgestellten Informationen entstehen, ist ausgeschlossen, soweit gesetzlich zulässig.
+    </p>
+    
+    <p class="disclaimer-text">
+      Bei gesundheitlichen Beschwerden, bestehenden Erkrankungen, Einnahme von Medikamenten oder Unsicherheiten ist stets ein Arzt oder anderes qualifiziertes medizinisches Fachpersonal zu konsultieren.
+    </p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-links">
+    <a href="https://www.thevitalist.co/impressum" target="_blank">Impressum</a>
+    <a href="https://www.thevitalist.co/datenschutz" target="_blank">Datenschutz</a>
+  </div>
+</footer>
+
+<!-- OPTIONAL: Smooth Scroll Script -->
+<script>
+// Falls du einen "Quiz starten" Button oben haben willst, der zum Typeform scrollt:
+function scrollToQuiz() {
+  document.querySelector('.typeform-section').scrollIntoView({ 
+    behavior: 'smooth' 
+  });
+}
+
+// Falls du Typeform Completion Tracking brauchst:
+window.addEventListener('message', function(event) {
+  if (event.data.type === 'form-submit') {
+    console.log('Quiz abgeschlossen!');
+    // Hier kannst du Analytics Tracking einfügen
+    // z.B. gtag('event', 'quiz_complete');
+  }
+});
+</script>
+
+</body>
+</html>
