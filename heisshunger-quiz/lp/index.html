@@ -327,9 +327,10 @@ body{font-family:'Nunito',sans-serif;background:var(--white);color:var(--text);f
   .hero-body{
     max-width:440px;
   }
-  .btn.btn-center{
+  .hero-content .btn.btn-center{
     max-width:360px;
     margin-left:0;
+    margin-right:auto;
   }
   .trust-row{
     justify-content:flex-start;
@@ -342,19 +343,31 @@ body{font-family:'Nunito',sans-serif;background:var(--white);color:var(--text);f
 ──────────────────────────────────────────────────────────── */
 @media(min-width:900px){
 
-  /* HEADER */
-  .site-header{padding:14px 60px}
+  /* HEADER – Logo zentriert, Badge rechts */
+  .site-header{padding:14px 60px;position:relative;justify-content:center}
+  .logo-text img{width:18% !important;max-width:130px}
+  .badge-offer{position:absolute;right:60px;top:50%;transform:translateY(-50%)}
 
-  /* SECTIONS – breiterer Container & mehr Padding */
+  /* INNER CONTAINER & SECTIONS */
   .inner{max-width:960px !important}
   .section{padding:60px 48px}
+
+  /* ALLE CTAs – zentriert (Hero-CTA hat höhere Spezifität, bleibt links) */
+  .btn.btn-center{margin:0 auto}
+
+  /* DESKTOP PRODUKT-LAYOUT: Slider links (sticky), Info rechts */
+  .desktop-product-layout{max-width:960px;margin:0 auto;padding:48px 48px 0;display:flex;gap:48px;align-items:flex-start;background:#fff}
+  .desktop-product-layout>section{padding:0 !important;background:transparent !important}
+  .desktop-product-layout>section:first-child{flex:0 0 44%;position:sticky;top:64px}
+  .desktop-product-layout>section:last-child{flex:1}
+  .desktop-product-layout .inner{max-width:none !important;padding:0}
+  .desktop-product-layout .faq-list{max-width:none;margin:0}
+  .desktop-product-layout .plan-options{max-width:none}
+  .desktop-product-layout .btn.btn-center{margin:0 auto}
 
   /* MEDIA LOGOS – horizontale Reihe */
   .media-logos{flex-direction:row;justify-content:center;align-items:center;gap:56px}
   .media-logo{font-size:24px}
-
-  /* PLAN OPTIONS – zentriert & breiter */
-  .plan-options{max-width:640px;margin-left:auto;margin-right:auto}
 
   /* STATS BOX – 2×2 Grid */
   .stats-box{display:grid;grid-template-columns:1fr 1fr;gap:12px 20px}
@@ -370,16 +383,19 @@ body{font-family:'Nunito',sans-serif;background:var(--white);color:var(--text);f
   .bundle-cards-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;align-items:start}
   .bundle-selector-card{margin-bottom:0}
 
-  /* TEAM – 2×2 Raster */
-  .team-wrapper{max-width:960px !important;display:grid;grid-template-columns:1fr 1fr;gap:0 56px}
-  .team-sep{grid-column:1/-1}
-  .team-member{padding-top:28px}
+  /* TEAM – 2×2 Raster (Trenner ausgeblendet) */
+  .team-wrapper{max-width:960px !important;display:grid;grid-template-columns:1fr 1fr;gap:40px 56px;align-items:start}
+  .team-sep{display:none}
+  .team-member{padding-top:0}
 
-  /* FAQ */
+  /* FAQ – global */
   .faq-list{max-width:780px;margin-left:auto;margin-right:auto}
 
-  /* INGREDIENT GRID – Breite im größeren Container */
+  /* INGREDIENT GRID */
   .ingredient-grid{max-width:none}
+
+  /* FOOTER LOGO – kleiner */
+  .footer img{width:14% !important;max-width:110px}
 }
 </style>
 </head>
@@ -426,6 +442,7 @@ body{font-family:'Nunito',sans-serif;background:var(--white);color:var(--text);f
 </section>
 
 <div class="divider"></div>
+<div class="desktop-product-layout">
     <!-- PRODUCT IMAGE SLIDER -->
 <section class="section bg-white" style="padding-bottom:20px;">
   <div class="inner">
@@ -532,6 +549,7 @@ body{font-family:'Nunito',sans-serif;background:var(--white);color:var(--text);f
     </div>
   </div>
 </section>
+</div><!-- /desktop-product-layout -->
 
 <!-- MEDIA LOGOS -->
 <section class="section bg-white" style="padding-top:0;">
