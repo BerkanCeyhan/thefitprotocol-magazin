@@ -782,6 +782,10 @@ body{font-family:'Nunito',sans-serif;background:var(--white);color:var(--text);f
          <div class="bundle-image-wrapper">
     <img src="../../assets/bundle-1.jpeg" alt="2er-Set Geschmacksbombe" class="bundle-image">
   </div>
+  <ul class="bundle-includes">
+  <li><div class="chk-blue">✓</div>2x Geschmacksbombe deiner Wahl <span class="val-pink">(Wert: 39,90€)</span></li>
+  <li><div class="chk-blue">✓</div>80 Portionen purer Geschmack</li>
+</ul>
         <div class="flavor-select">
           <label for="flavor1-2er">Geschmack #1:</label>
           <select id="flavor1-2er" class="flavor-dropdown">
@@ -835,6 +839,12 @@ body{font-family:'Nunito',sans-serif;background:var(--white);color:var(--text);f
           <div class="bundle-image-wrapper">
     <img src="../../assets/bundle-2.jpeg" alt="4er-Set Geschmacksbombe" class="bundle-image">
   </div>
+    <ul class="bundle-includes">
+  <li><div class="chk-blue">✓</div>4x Geschmacksbombe deiner Wahl <span class="val-pink">(Wert: 79,80€)</span></li>
+  <li><div class="chk-blue">✓</div>1x Rezeptbuch <span class="val-pink">GRATIS</span></li>
+  <li><div class="chk-blue">✓</div>1x Premium Shaker <span class="val-pink">GRATIS</span></li>
+  <li><div class="chk-blue">✓</div>Gratis Premium Versand <span class="val-pink">(Wert: 4,99€)</span></li>
+</ul>
         <div class="flavor-select">
           <label for="flavor1-4er">Geschmack #1:</label>
           <select id="flavor1-4er" class="flavor-dropdown">
@@ -921,6 +931,12 @@ body{font-family:'Nunito',sans-serif;background:var(--white);color:var(--text);f
           <div class="bundle-image-wrapper">
     <img src="../../assets/bundle-3.jpeg" alt="6er-Set Geschmacksbombe" class="bundle-image">
   </div>
+  <ul class="bundle-includes">
+  <li><div class="chk-blue">✓</div>6x Geschmacksbombe deiner Wahl <span class="val-pink">(Wert: 119,70€)</span></li>
+  <li><div class="chk-blue">✓</div>1x Rezeptbuch <span class="val-pink">GRATIS</span></li>
+  <li><div class="chk-blue">✓</div>1x Premium Shaker <span class="val-pink">GRATIS</span></li>
+  <li><div class="chk-blue">✓</div>Gratis Premium Versand <span class="val-pink">(Wert: 4,99€)</span></li>
+</ul>
         <div class="flavor-select">
           <label for="flavor1-6er">Geschmack #1:</label>
           <select id="flavor1-6er" class="flavor-dropdown">
@@ -1572,29 +1588,125 @@ function goToSlide(index) {
 </footer>
 
 <script>
+const PRODUCTS = {
+  // Geschmäcker
+  flavors: {
+    'blaubeere': '50647839310088',
+    'apfel': '39608308269139',
+    'banane': '39608308236371',
+    'butterkeks': '39608308301907',
+    'erdbeere': '39608308334675',
+    'erdnuss': '43528511553800',
+    'haselnuss': '39608308367443',
+    'himbeere': '43528504082696',
+    'kirsche': '50647839342856',
+    'schoko': '39608308432979',
+    'tiramisu': '39608308498515',
+    'vanille': '43528505590024'
+  },
+  
+  // Bonus-Produkte
+  bonusProducts: {
+    shaker: '43807449612552',
+    rezeptbuch: '52496277504264'
+  }
+};
+
+
+// Welche Bundles bekommen welche Bonus-Produkte?
+const BUNDLE_BONUSES = {
+  '2er': [], // Kein Bonus
+  '4er': ['shaker', 'rezeptbuch'], // 4er-Set bekommt beides GRATIS
+  '6er': ['shaker', 'rezeptbuch']  // 6er-Set bekommt beides GRATIS
+};
+
+function addToCart(bundleSize) {
+  let variants = [];
+  
+  // Sammle gewählte Geschmäcker
+  if (bundleSize === '2er') {
+    variants = [
+      document.getElementById('flavor1-2er').value,
+      document.getElementById('flavor2-2er').value
+    ];
+  } else if (bundleSize === '4er') {
+    variants = [
+      document.getElementById('flavor1-4er').value,
+      document.getElementById('flavor2-4er').value,
+      document.getElementById('flavor3-4er').value,
+      document.getElementById('flavor4-4er').value
+    ];
+  } else if (bundleSize === '6er') {
+    variants = [
+      document.getElementById('flavor1-6er').value,
+      document.getElementById('flavor2-6er').value,
+      document.getElementById('flavor3-6er').value,
+      document.getElementById('flavor4-6er').value,
+      document.getElementById('flavor5-6er').value,
+      document.getElementById('flavor6-6er').value
+    ];
+  }
+  
+  // Zähle jede Variante (falls Kunde denselben Geschmack mehrfach wählt)
+  const variantCounts = {};
+  variants.forEach(v => {
+    variantCounts[v] = (variantCounts[v] || 0) + 1;
+  });
+  
+  // Füge Bonus-Produkte hinzu (nur bei 4er + 6er Set)
+  const bonuses = BUNDLE_BONUSES[bundleSize] || [];
+  bonuses.forEach(bonusKey => {
+    const bonusVariantId = PRODUCTS.bonusProducts[bonusKey];
+    if (bonusVariantId) {
+      variantCounts[bonusVariantId] = 1; // Je 1x Bonus-Produkt
+    }
+  });
+  
+  // Baue Cart Permalink
+  const cartItems = Object.entries(variantCounts)
+    .map(([variantId, quantity]) => `${variantId}:${quantity}`)
+    .join(',');
+  
+  const discountCode = DISCOUNT_CODES[bundleSize];
+  const cartUrl = `https://brustbizeps.de/cart/${cartItems}?discount=${discountCode}`;
+  
+  // Debug-Log (optional, kann später entfernt werden)
+  console.log('🛒 Cart URL:', cartUrl);
+  console.log('📦 Bundle:', bundleSize);
+  console.log('🎁 Bonuses:', bonuses);
+  console.log('📋 Variant Counts:', variantCounts);
+  
+  // Redirect zum Checkout
+  window.location.href = cartUrl;
+}
+
+// Plan Selector (für die obere Auswahl-Section)
 let selectedBundle = '4er'; // Default
 
 function selectPlan(el, bundleSize) {
-  // Entferne active von allen
   document.querySelectorAll('.plan-opt').forEach(o => o.classList.remove('active'));
-  // Setze active auf geklicktes Element
   el.classList.add('active');
-  // Speichere Auswahl
   selectedBundle = bundleSize;
   
-  // Update Button Text
   const prices = {
     '2er': '€29,95',
     '4er': '€54,95',
     '6er': '€74,95'
   };
+  
   const btnText = document.querySelector('.btn-center');
   if (btnText && btnText.textContent.includes('Jetzt')) {
     btnText.textContent = `Jetzt Geschmäcker wählen · ${prices[bundleSize]}`;
   }
 }
-document.querySelectorAll('.faq-q').forEach(q=>q.addEventListener('click',()=>q.parentElement.classList.toggle('open')));
-document.querySelectorAll('a[href="#bundles"]').forEach(el=>el.addEventListener('click',e=>{e.preventDefault();document.getElementById('bundles').scrollIntoView({behavior:'smooth'})}));
+
+// Smooth scroll zu Bundle-Selector
+document.querySelectorAll('a[href="#bundle-selector"]').forEach(el => {
+  el.addEventListener('click', e => {
+    e.preventDefault();
+    document.getElementById('bundle-selector').scrollIntoView({ behavior: 'smooth' });
+  });
+});
 </script>
 </body>
 </html>
