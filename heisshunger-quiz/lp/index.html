@@ -232,9 +232,10 @@ body{font-family:'Nunito',sans-serif;background:var(--white);color:var(--text);f
 .tp-name{color:var(--trustpilot)}
 .tp-sep{color:var(--border)}
 .bundle-includes{list-style:none;margin-bottom:16px;display:flex;flex-direction:column;gap:8px}
-.bundle-includes li{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--text-body)}
+.bundle-includes li{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text-body)}
 .chk-blue{width:22px;height:22px;background:var(--purple);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#fff;font-size:11px;font-weight:900}
-.val-pink{color:var(--pink);font-weight:700}
+.inc-label{flex:1;display:flex;justify-content:space-between;align-items:center;gap:6px;min-width:0}
+.val-pink{color:var(--pink);font-weight:700;white-space:nowrap;flex-shrink:0}
 .price-row{margin-bottom:14px}
 .price-main{font-size:24px;font-weight:900;color:var(--text)}
 .price-old{font-size:14px;color:var(--text-muted);text-decoration:line-through;margin-right:6px}
@@ -783,7 +784,8 @@ body{font-family:'Nunito',sans-serif;background:var(--white);color:var(--text);f
     <img src="../../assets/bundle-1.jpeg" alt="2er-Set Geschmacksbombe" class="bundle-image">
   </div>
   <ul class="bundle-includes">
-  <li><div class="chk-blue">✓</div>2x Geschmacksbombe deiner Wahl <span class="val-pink">(Wert: 31,8€)</span> zzgl. 4,99€ Versand</li>
+  <li><div class="chk-blue">✓</div><span class="inc-label">2x Geschmacksbombe<span class="val-pink">(Wert: 31,8€)</span></span></li>
+  <li><div class="chk-blue">✓</div><span class="inc-label">Versandkosten<span class="val-pink">4,99€</span></span></li>
 </ul>
         <div class="flavor-select">
           <label for="flavor1-2er">Geschmack #1:</label>
@@ -838,11 +840,11 @@ body{font-family:'Nunito',sans-serif;background:var(--white);color:var(--text);f
     <img src="../../assets/bundle-2.jpeg" alt="4er-Set Geschmacksbombe" class="bundle-image">
   </div>
     <ul class="bundle-includes">
-  <li><div class="chk-blue">✓</div>4x Geschmacksbombe deiner Wahl<span class="val-pink">(Wert: 63,6€)</span></li>
-  <li><div class="chk-blue">✓</div>1x Rezeptbuch <span class="val-pink">GRATIS (Wert 24,90€)</span></li>
-  <li><div class="chk-blue">✓</div>1x Premium Shaker <span class="val-pink">GRATIS (Wert 9,90€)</span></li>
-  <li><div class="chk-blue">✓</div>Premium Versand <span class="val-pink">GRATIS (Wert: 4,99€)</span></li>
-  <li>🎁ㅤ+ 2 ZUFÄLLIGE PROBEN<span class="val-pink">GRATIS</span></li>
+  <li><div class="chk-blue">✓</div><span class="inc-label">4x Geschmacksbombe<span class="val-pink">(Wert: 63,6€)</span></span></li>
+  <li><div class="chk-blue">✓</div><span class="inc-label">1x Rezeptbuch<span class="val-pink">GRATIS (Wert 24,90€)</span></span></li>
+  <li><div class="chk-blue">✓</div><span class="inc-label">1x Premium Shaker<span class="val-pink">GRATIS (Wert 9,90€)</span></span></li>
+  <li><div class="chk-blue">✓</div><span class="inc-label">Premium Versand<span class="val-pink">GRATIS (Wert: 4,99€)</span></span></li>
+  <li><span class="inc-label">🎁 + 2 ZUFÄLLIGE PROBEN<span class="val-pink">GRATIS</span></span></li>
 </ul>
         <div class="flavor-select">
           <label for="flavor1-4er">Geschmack #1:</label>
@@ -931,10 +933,10 @@ body{font-family:'Nunito',sans-serif;background:var(--white);color:var(--text);f
     <img src="../../assets/bundle-3.jpeg" alt="6er-Set Geschmacksbombe" class="bundle-image">
   </div>
   <ul class="bundle-includes">
-  <li><div class="chk-blue">✓</div>6x Geschmacksbombe deiner Wahl <span class="val-pink">(Wert: 95,4€)</span></li>
-  <li><div class="chk-blue">✓</div>1x Rezeptbuch <span class="val-pink">GRATIS (Wert: 24,90€)</span></li>
-  <li><div class="chk-blue">✓</div>1x Premium Shaker <span class="val-pink">GRATIS (Wert: 9,90€)</span></li>
-  <li><div class="chk-blue">✓</div>Premium Versand <span class="val-pink">GRATIS (Wert: 4,99€)</span></li>
+  <li><div class="chk-blue">✓</div><span class="inc-label">6x Geschmacksbombe<span class="val-pink">(Wert: 95,4€)</span></span></li>
+  <li><div class="chk-blue">✓</div><span class="inc-label">1x Rezeptbuch<span class="val-pink">GRATIS (Wert: 24,90€)</span></span></li>
+  <li><div class="chk-blue">✓</div><span class="inc-label">1x Premium Shaker<span class="val-pink">GRATIS (Wert: 9,90€)</span></span></li>
+  <li><div class="chk-blue">✓</div><span class="inc-label">Premium Versand<span class="val-pink">GRATIS (Wert: 4,99€)</span></span></li>
 </ul>
         <div class="flavor-select">
           <label for="flavor1-6er">Geschmack #1:</label>
