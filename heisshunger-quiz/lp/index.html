@@ -588,7 +588,7 @@ body{font-family:'Nunito',sans-serif;background:var(--white);color:var(--text);f
         <div class="review-title">Mein Geheimtipp!</div>
         <div class="review-text">„Ich war es leid, jeden Abend gegen meinen eigenen Körper zu kämpfen. Mit der Geschmacksbombe ist dieser innere Kampf einfach weg. Mein Quark schmeckt wie Dessert, mein Shake wie ein Milkshake – und ich nehme trotzdem ab. Ich schlafe besser als seit Jahren!" </div>
     </div>
-    <div style="text-align:center;margin-top:24px;"><a href="#bundles" class="btn btn-center">JETZT GESCHMACKSBOMBE ENTDECKEN</a></div>
+    <div style="text-align:center;margin-top:24px;"><a href="#bundle-selector" class="btn btn-center">JETZT GESCHMACKSBOMBE ENTDECKEN</a></div>
   </div>
 </section>
 
@@ -634,7 +634,7 @@ body{font-family:'Nunito',sans-serif;background:var(--white);color:var(--text);f
       <div class="stat-row"><div class="stat-check">✓</div>7 Mal ausverkauft in 4 Jahren aufgrund von hoher Nachfrage</div>
       <div class="stat-row"><div class="stat-check">✓</div>Mehr als 50.000 Menschen haben ihr altes Ich zurückgewonnen</div>
     </div>
-    <a href="#bundles" class="btn btn-center">JETZT GESCHMACKSBOMBE PROBIEREN</a>
+    <a href="#bundle-selector" class="btn btn-center">JETZT GESCHMACKSBOMBE PROBIEREN</a>
     <div class="guar-pill">✅ 30 Tage Geld-zurück-Garantie</div>
   </div>
 </section>
@@ -692,7 +692,7 @@ body{font-family:'Nunito',sans-serif;background:var(--white);color:var(--text);f
     </div>
 
     <div style="text-align:center;margin-top:40px;">
-      <a href="#bundles" class="btn btn-center">JETZT GESCHMACKSBOMBE PROBIEREN</a>
+      <a href="#bundle-selector" class="btn btn-center">JETZT GESCHMACKSBOMBE PROBIEREN</a>
       <div class="guar-pill">✅ 30 Tage Geld-zurück-Garantie</div>
     </div>
   </div>
@@ -718,7 +718,7 @@ body{font-family:'Nunito',sans-serif;background:var(--white);color:var(--text);f
       <li class="check-item"><div class="check-circle">✓</div><span>Stimmungstiefs durch Zuckerentzug vermeidest</span></li>
        <li class="check-item"><div class="check-circle">✓</div><span>Dich wieder wie du selbst fühlst – leicht, zufrieden & in Kontrolle</span></li>
     </ul>
-    <div style="text-align:center;margin-top:24px;"><a href="#bundles" class="btn btn-center">JETZT GESCHMACKSBOMBE PROBIEREN</a><div class="guar-pill">✅ 30 Tage Geld-zurück-Garantie</div></div>
+    <div style="text-align:center;margin-top:24px;"><a href="#bundle-selector" class="btn btn-center">JETZT GESCHMACKSBOMBE PROBIEREN</a><div class="guar-pill">✅ 30 Tage Geld-zurück-Garantie</div></div>
   </div>
 </section>
 
@@ -740,7 +740,7 @@ body{font-family:'Nunito',sans-serif;background:var(--white);color:var(--text);f
       <li class="check-item"><div class="check-circle">✓</div><span>Deinen Darm unterstützen & Blähungen reduzieren – dein Lieblingsessen genießen, ohne aufgeblähtes Gefühl oder schweres Bauchgefühl nach dem Essen</span></li>
       <li class="check-item"><div class="check-circle">✓</div><span>Deine Diät endlich durchhalten – keine Diät bricht mehr zusammen, weil der Heißhunger zuschlägt – du hast jetzt eine smarte, alltagstaugliche Antwort</span></li>
     </ul>
-    <div style="text-align:center;margin-top:24px;"><a href="#bundles" class="btn btn-center">JETZT GESCHMACKSBOMBE PROBIEREN</a><div class="guar-pill">✅ 30 Tage Geld-zurück-Garantie</div></div>
+    <div style="text-align:center;margin-top:24px;"><a href="#bundle-selector" class="btn btn-center">JETZT GESCHMACKSBOMBE PROBIEREN</a><div class="guar-pill">✅ 30 Tage Geld-zurück-Garantie</div></div>
   </div>
 </section>
 
@@ -1445,6 +1445,16 @@ function addToCart(bundleSize) {
   window.location.href = cartUrl;
 }
 
+// ─── FLAVOR DROPDOWN PLACEHOLDER ───
+document.querySelectorAll('.flavor-dropdown').forEach(sel => {
+  const ph = document.createElement('option');
+  ph.value = '';
+  ph.disabled = true;
+  ph.selected = true;
+  ph.textContent = '👆 Geschmack wählen';
+  sel.insertBefore(ph, sel.firstChild);
+});
+
 // ─── PRODUCT SLIDER ───
 let currentSlide = 0;
 const slides = document.querySelectorAll('.slider-slide');
@@ -1575,7 +1585,7 @@ function goToSlide(index) {
   </div>
 </div>
 
-    <div style="text-align:center;margin-top:28px;"><a href="#bundles" class="btn btn-center">JETZT GESCHMACKSBOMBE PROBIEREN</a><div class="guar-pill">✅ 30 Tage Geld-zurück-Garantie</div></div>
+    <div style="text-align:center;margin-top:28px;"><a href="#bundle-selector" class="btn btn-center">JETZT GESCHMACKSBOMBE PROBIEREN</a><div class="guar-pill">✅ 30 Tage Geld-zurück-Garantie</div></div>
   </div>
 </section>
 
@@ -1645,13 +1655,18 @@ function addToCart(bundleSize) {
       document.getElementById('flavor6-6er').value
     ];
   }
-  
+
+  if (variants.includes('')) {
+    alert('Fast fertig! Wähle noch deine Lieblingsgeschmäcker aus 👆');
+    return;
+  }
+
   // Zähle jede Variante (falls Kunde denselben Geschmack mehrfach wählt)
   const variantCounts = {};
   variants.forEach(v => {
     variantCounts[v] = (variantCounts[v] || 0) + 1;
   });
-  
+
   // Füge Bonus-Produkte hinzu (nur bei 4er + 6er Set)
   const bonuses = BUNDLE_BONUSES[bundleSize] || [];
   bonuses.forEach(bonusKey => {
