@@ -399,6 +399,21 @@ body{font-family:'Nunito',sans-serif;background:var(--white);color:var(--text);f
   .footer img{width:14% !important;max-width:110px}
 }
 </style>
+
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window,document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '458434359587251');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=458434359587251&ev=PageView&noscript=1"/></noscript>
+<!-- End Meta Pixel Code -->
 </head>
 <body>
 
@@ -832,7 +847,7 @@ body{font-family:'Nunito',sans-serif;background:var(--white);color:var(--text);f
         <h3>🌳 4er-Set</h3>
         <div class="bundle-price">
           <span class="price-old">€103,39</span>
-          <span class="price-main">€67,90</span>
+          <span class="price-main">€63,60</span>
         </div>
       </div>
       <div class="bundle-body">
@@ -840,7 +855,7 @@ body{font-family:'Nunito',sans-serif;background:var(--white);color:var(--text);f
     <img src="../../assets/bundle-2.jpeg" alt="4er-Set Geschmacksbombe" class="bundle-image">
   </div>
     <ul class="bundle-includes">
-  <li><div class="chk-blue">✓</div><span class="inc-label">4x Geschmacksbombe<span class="val-pink">(Wert: 63,6€)</span></span></li>
+  <li><div class="chk-blue">✓</div><span class="inc-label">4x Geschmacksbombe<span class="val-pink">(Wert: 63,60€)</span></span></li>
   <li><div class="chk-blue">✓</div><span class="inc-label">1x Rezeptbuch<span class="val-pink">GRATIS (Wert 24,90€)</span></span></li>
   <li><div class="chk-blue">✓</div><span class="inc-label">1x Premium Shaker<span class="val-pink">GRATIS (Wert 9,90€)</span></span></li>
   <li><div class="chk-blue">✓</div><span class="inc-label">Premium Versand<span class="val-pink">GRATIS (Wert: 4,99€)</span></span></li>
@@ -915,7 +930,7 @@ body{font-family:'Nunito',sans-serif;background:var(--white);color:var(--text);f
           </select>
         </div>
         <button class="btn btn-center" onclick="addToCart('4er')">JETZT HEIßUNGER BESIEGEN</button>
-        <p class="bundle-savings">Du sparst €35,49 + Gratis Versand</p>
+        <p class="bundle-savings">Du sparst €39,79 + Gratis Versand</p>
       </div>
     </div>
 
@@ -925,7 +940,7 @@ body{font-family:'Nunito',sans-serif;background:var(--white);color:var(--text);f
         <h3>💰 6er-Set – Beste Ersparnis</h3>
         <div class="bundle-price">
           <span class="price-old">€135,19</span>
-          <span class="price-main">€97,9</span>
+          <span class="price-main">€95,40</span>
         </div>
       </div>
       <div class="bundle-body">
@@ -933,7 +948,7 @@ body{font-family:'Nunito',sans-serif;background:var(--white);color:var(--text);f
     <img src="../../assets/bundle-3.jpeg" alt="6er-Set Geschmacksbombe" class="bundle-image">
   </div>
   <ul class="bundle-includes">
-  <li><div class="chk-blue">✓</div><span class="inc-label">6x Geschmacksbombe<span class="val-pink">(Wert: 95,4€)</span></span></li>
+  <li><div class="chk-blue">✓</div><span class="inc-label">6x Geschmacksbombe<span class="val-pink">(Wert: 95,40€)</span></span></li>
   <li><div class="chk-blue">✓</div><span class="inc-label">1x Rezeptbuch<span class="val-pink">GRATIS (Wert: 24,90€)</span></span></li>
   <li><div class="chk-blue">✓</div><span class="inc-label">1x Premium Shaker<span class="val-pink">GRATIS (Wert: 9,90€)</span></span></li>
   <li><div class="chk-blue">✓</div><span class="inc-label">Premium Versand<span class="val-pink">GRATIS (Wert: 4,99€)</span></span></li>
@@ -1691,9 +1706,25 @@ function addToCart(bundleSize) {
   console.log('📦 Bundle:', bundleSize);
   console.log('🎁 Bonuses:', bonuses);
   console.log('📋 Variant Counts:', variantCounts);
-  
+
+  // InitiateCheckout Tracking
+  var eventId = 'checkout-' + Math.random().toString(36).substring(2, 12);
+  if (typeof fbq === 'function') {
+    fbq('track', 'InitiateCheckout', {}, { eventID: eventId });
+  }
+  fetch('https://hook.eu2.make.com/3twik1k3nvgvm8d9r91adyu3nwjki8xs', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      trigger: true,
+      event_name: 'InitiateCheckout',
+      client_user_agent: navigator.userAgent,
+      event_id: eventId
+    })
+  }).catch(function() {});
+
   // Redirect zum Checkout
-  window.location.href = cartUrl;
+  setTimeout(function() { window.location.href = cartUrl; }, 200);
 }
 
 // Plan Selector (für die obere Auswahl-Section)
