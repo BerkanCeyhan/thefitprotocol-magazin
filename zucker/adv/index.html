@@ -228,6 +228,9 @@
     .science-icon { font-size: 28px; width: 40px; flex-shrink: 0; text-align: center; }
     .science-name { font-weight: 700; font-size: 15px; color: var(--purple); margin-bottom: 3px; }
     .science-desc { font-size: 14px; color: #555; line-height: 1.55; }
+    .science-desc ul { list-style: none; margin: 6px 0 0; }
+    .science-desc li { padding: 4px 0; font-size: 14px; color: #555; line-height: 1.5; }
+    .science-desc li::before { content: "✓ "; color: var(--green); font-weight: 700; }
 
     /* ── COMPARISON CARDS ── */
     .compare-cards { display: flex; flex-direction: column; gap: 10px; margin: 24px 0; }
@@ -542,6 +545,15 @@
     .footer-links { display: flex; gap: 20px; justify-content: center; margin-top: 10px; flex-wrap: wrap; }
     .footer-links a { color: var(--purple); text-decoration: underline; }
 
+    /* ── ARTICLE IMAGE ── */
+    .article-img {
+      width: 100%;
+      border-radius: 10px;
+      margin: 28px 0;
+      display: block;
+      object-fit: cover;
+    }
+
     /* ── RESPONSIVE ── */
     @media(max-width:600px) {
       .pros-cons { grid-template-columns: 1fr; }
@@ -555,8 +567,7 @@
 <!-- ═══ HEADER ═══ -->
 <header class="site-header">
   <div class="header-inner">
-    <a href="../../" class="header-logo">The Fit<span>Protocol</span></a>
-    <span class="header-anzeige">Advertorial</span>
+    <a href="../../" class="header-logo"><img src="../../assets/logo.png" alt="The Fit Protocol" style="height:36px;width:auto;display:block;"></a> 
   </div>
 </header>
 
@@ -565,7 +576,7 @@
   <article class="article-outer">
 
     <div class="article-cat">
-      Ernährung &amp; Lifestyle &nbsp;·&nbsp; <span class="adv-tag">Advertorial</span>
+      Ernährung &amp; Lifestyle &nbsp;·&nbsp; <span class="" style="color:#c9c9c9">Advertorial</span>
     </div>
 
     <h1 class="article-headline">
@@ -573,7 +584,7 @@
     </h1>
 
     <p class="article-deck">
-      Mit 34 habe ich jede Diät mit derselben Niederlage beendet. Nicht weil ich zu schwach war. Sondern weil niemand mir gesagt hat, was in meinem Gehirn wirklich passiert, wenn ich auf Süßes verzichte. Dann entdeckte ich die Wahrheit – und sie hat alles verändert.
+      Mit 45 habe ich jede Diät mit derselben Niederlage beendet. Nicht weil ich zu schwach war. Sondern weil niemand mir gesagt hat, was in meinem Gehirn wirklich passiert, wenn ich auf Süßes verzichte. Dann entdeckte ich die Wahrheit – und sie hat alles verändert.
     </p>
 
     <div class="author-row">
@@ -583,16 +594,12 @@
       <div>
         <div class="author-name">Jana Hoffmann</div>
         <div class="author-role">Ernährungs- und Lifestyle-Redakteurin</div>
-        <div class="author-date">14. Februar 2026 · 14 Min. Lesezeit</div>
+        <div class="author-date">18. Februar 2026 · 8 Min. Lesezeit</div>
       </div>
     </div>
 
     <!-- Hero Image -->
-    <div class="img-ph">
-      <span class="ico">📷</span>
-      <strong>HERO-BILD</strong>
-      <span class="lbl">z.B. Frau greift nachts zu Schokolade / Kaffee-Moment morgens / Lifestyle-Ernährungsfoto<br>Empfehlung: 740 × 420 px</span>
-    </div>
+    <img src="../../assets/hero-image-adv.jpeg" alt="Geschmacksbombe Advertorial" class="article-img">
 
     <!-- ─── ARTICLE BODY ─── -->
     <div class="article-body">
@@ -607,13 +614,8 @@
       <p>Was ich herausgefunden habe, möchte ich heute mit dir teilen. Denn wenn du schon mehrfach versucht hast, Zucker zu reduzieren, und immer wieder gescheitert bist – dann lag es wahrscheinlich nicht an dir.</p>
 
       <!-- INLINE IMAGE 1 -->
-      <div class="img-ph">
-        <span class="ico">📷</span>
-        <strong>BILD 1: Das Zucker-Problem</strong>
-        <span class="lbl">z.B. Gehirn-Illustration / Süßrezeptoren-Symbolik / Frau kämpft gegen Heißhunger</span>
-      </div>
-
-      <h2>Das Süß-Paradox: Warum Verzicht biologisch zum Scheitern verurteilt ist</h2>
+      <img src="../../assets/bild1.jpeg" alt="Geschmacksbombe Advertorial" class="article-img">
+      <h2>Das Süß-Paradoxon: Warum Verzicht biologisch zum Scheitern verurteilt ist</h2>
 
       <p>Lass mich dir etwas erklären, das die Diätindustrie nicht gerne hört.</p>
       <p>Dein Gehirn besitzt spezialisierte Süßrezeptoren – nicht nur auf der Zunge, sondern im gesamten Verdauungstrakt. Diese Rezeptoren sind evolutionär darauf ausgelegt, ein klares Signal zu senden, wenn sie ausreichend stimuliert werden: <em>Ich bin zufrieden. Ich habe bekommen, was ich brauche.</em></p>
@@ -625,7 +627,9 @@
       </div>
 
       <p>Und genau hier liegt das fundamentale Problem mit dem Rat „Iss einfach weniger Süßes": Er ignoriert vollständig, was in deinem Körper passiert, wenn du das versuchst. Du kämpfst nicht gegen eine schlechte Angewohnheit. Du kämpfst gegen dein eigenes Gehirn.</p>
-
+    
+      <img src="../../assets/bild 1.jpeg" alt="Geschmacksbombe Advertorial" class="article-img">
+      
       <h2>Das größere Problem: Warum alle bekannten Alternativen dieses Problem nicht lösen</h2>
 
       <p>Aber es kommt noch schlimmer. Denn natürlich bist du nicht die Erste, die das erkannt hat. Der Markt ist voll mit Lösungen.</p>
@@ -640,6 +644,10 @@
         Das Ergebnis: Du tauschst ein Problem gegen das nächste. Die Grundursache bleibt ungelöst. Dein Gehirn bleibt unbefriedigt.
       </div>
 
+      <p>Und irgendwann – manchmal nach Wochen, manchmal nach Tagen – gewinnt der Schokoriegel.</p>
+
+      <img src="../../assets/bild-2.jpeg" alt="Geschmacksbombe Advertorial" class="article-img">
+
       <h2>Die Lösung, die ich zufällig entdeckte – und erst nicht ernst nahm</h2>
 
       <p>Ich muss ehrlich sein: Als mir eine Freundin zum ersten Mal davon erzählte, hörte ich höflich zu – und dachte innerlich: <em>Wieder so ein Produkt.</em></p>
@@ -649,11 +657,7 @@
       <p>Sondern: Warum dein Gehirn beim Zuckerverzicht überhaupt in den Entzug geht – und was nötig ist, um das zu verhindern.</p>
 
       <!-- INLINE IMAGE 2 -->
-      <div class="img-ph">
-        <span class="ico">📷</span>
-        <strong>BILD 2: Wissenschaft / Forschung</strong>
-        <span class="lbl">z.B. Laborkontext, Molekül-Symbolik, Frau liest Studie – Editorial-Stil</span>
-      </div>
+      <img src="../../assets/loesungsprinzip.jpeg" alt="Geschmacksbombe Advertorial" class="article-img">
 
       <h2>Was in deinem Gehirn wirklich passiert – und warum das der entscheidende Unterschied ist</h2>
 
@@ -662,46 +666,43 @@
       <p>Wenn du Zucker isst, binden Glukosemoleküle an spezifische Süßrezeptoren – auf der Zunge, aber auch im gesamten Verdauungstrakt. Diese Bindung sendet ein klares Signal an dein Gehirn: <em>Bedürfnis erfüllt. Zufrieden. Beruhigt.</em></p>
       <p>Wenn du aufhörst, Zucker zu essen, ohne diese Rezeptoren anderweitig vollständig zu stimulieren, bleibt dieses Signal aus. Dein Gehirn registriert nicht „ich esse gesünder". Es registriert: unerfülltes Bedürfnis. Und es reagiert darauf so, wie es auf jedes unerfüllte Bedürfnis reagiert – mit wachsendem Verlangen, steigendem Cortisol und irgendwann mit Heißhunger, gegen den Willenskraft schlicht keine Chance hat.</p>
       <p>Das ist der Grund, warum Stevia so oft scheitert: Es stimuliert die Rezeptoren – aber unvollständig. Der Körper spürt die Diskrepanz. Der Nachgeschmack ist nicht zufällig. Er ist das sensorische Zeichen dafür, dass das Befriedigungssignal nie vollständig ankam.</p>
+      <p>Das ist auch der Grund, warum Verzicht langfristig nicht funktioniert: Du kämpfst nicht gegen eine Gewohnheit. Du kämpfst gegen ein neurochemisches Signal, das deinen Körper zum Überleben programmiert hat.</p>
 
       <div class="pullquote">
         Die eigentliche Frage ist also nicht: Wie reduziere ich Zucker? Die Frage ist: Wie befriedige ich die Rezeptoren vollständig – ohne die Kalorien?
       </div>
 
+      <img src="../../assets/geschmack-zunge.jpeg" alt="Geschmacksbombe Advertorial" class="article-img">
+
       <h2>Was die Wissenschaft dazu sagt</h2>
 
-      <p>Als ich das zum ersten Mal hörte, wollte ich es verstehen. Also habe ich die Forschung gelesen. Was mich überzeugt hat:</p>
+      <p>Als ich das zum ersten Mal hörte, wollte ich es verstehen. Also habe ich die Forschung gelesen.</p>
+      <p>Was mich überzeugt hat: Es gibt einen Wirkstoff, der die Süßrezeptoren mit einer Intensität stimuliert, die normaler Haushaltszucker nicht erreicht. Nicht annäherungsweise süßer. Sondern ein Vielfaches davon – bei praktisch null Kalorien und ohne Einfluss auf den Blutzuckerspiegel.</p>
+      <p>Die Europäische Behörde für Lebensmittelsicherheit hat ihn nach umfangreicher Prüfung als sicher eingestuft. Für Diabetiker ist er ausdrücklich geeignet – weil er den Insulinspiegel nicht beeinflusst. Für alle anderen bedeutet das: kein Blutzuckerspike, kein anschließender Crash, kein Heißhunger eine Stunde nach dem Essen.</p>
+      <p>Der zweite Wirkstoff ist ein natürlich vorkommendes Präbiotikum, das das Wachstum gesunder Darmbakterien fördert. Klingt zunächst unspektakulär – ist es aber nicht. Studien zeigen, dass eine gesunde Darmflora direkt mit der Regulation von Appetit und Sättigungsgefühl zusammenhängt. Wer seinen Darm gut versorgt, kämpft messbar weniger gegen Heißhunger.</p>
+      <p>Die Kombination beider Wirkstoffe macht etwas, das keine andere Lösung auf dem Markt in dieser Form tut:</p>
+      <p>Sie befriedigt die Rezeptoren vollständig. Sie unterstützt das Sättigungssignal. Und sie tut das bei 4,5 Kalorien pro Portion.</p>
+      <p>Es ist nicht der alte Ansatz – ersetze Zucker durch etwas Ähnlicheres. Es ist ein grundlegend anderer Mechanismus: Gib deinem Gehirn das Signal, das es braucht, um aufzuhören zu fordern.</p>
+      <p>Bei meiner Suche nach einem Produkt, das genau diesen Mechanismus nutzt – mit der richtigen Wirkstoffkombination, sauber formuliert, ohne Kompromisse beim Geschmack – bin ich auf die Geschmacksbombe gestoßen.</p>
+   
+      <img src="../../assets/glucose_inulin.jpeg" alt="Geschmacksbombe Advertorial" class="article-img">
 
-      <div class="science-box">
-        <div class="box-title">Die zwei entscheidenden Wirkstoffe</div>
+      <h2>Was die Geschmacksbombe anders macht</h2>
 
-        <div class="science-item">
-          <div class="science-icon">🔬</div>
-          <div>
-            <div class="science-name">Sucralose – Der vollständige Rezeptor-Aktivator</div>
-            <div class="science-desc">Ein Wirkstoff, der die Süßrezeptoren mit einer Intensität stimuliert, die normaler Haushaltszucker nicht erreicht – bei praktisch null Kalorien und ohne Einfluss auf den Blutzuckerspiegel. Die Europäische Behörde für Lebensmittelsicherheit hat ihn nach umfangreicher Prüfung als sicher eingestuft. Für Diabetiker ausdrücklich geeignet – kein Blutzuckerspike, kein Crash, kein Heißhunger danach.</div>
-          </div>
-        </div>
+      <p>Als ich die Geschmacksbombe das erste Mal in den Händen hielt, war mein erster Impuls: <em>Wieder ein Pulver mit einem cleveren Namen.</em></p>
+      <p>Aber dann sah ich, was drin steckt – und verstand, warum es ein anderer Ansatz ist.</p>
+      <p>Der erste Wirkstoff ist Sucralose. Er stimuliert die Süßrezeptoren mit einer Intensität, die normaler Haushaltszucker nicht erreicht – bei praktisch null Kalorien und ohne jeden Einfluss auf den Blutzuckerspiegel. Kein Nachgeschmack. Kein Kompromiss. 3 Gramm davon ersetzen 50 Gramm Zucker.</p>
+      <p>Der zweite Wirkstoff ist Inulin – ein natürlich vorkommendes Präbiotikum, das das Wachstum gesunder Darmbakterien fördert und die natürliche Regulation von Appetit und Sättigungsgefühl unterstützt. Nicht als Bonus. Als Teil des Mechanismus.</p>
 
-        <div class="science-item">
-          <div class="science-icon">🌿</div>
-          <div>
-            <div class="science-name">Inulin – Das natürliche Sättigungs-Präbiotikum</div>
-            <div class="science-desc">Ein natürlich vorkommendes Präbiotikum, das das Wachstum gesunder Darmbakterien fördert. Studien zeigen, dass eine gesunde Darmflora direkt mit der Regulation von Appetit und Sättigungsgefühl zusammenhängt. Wer seinen Darm gut versorgt, kämpft messbar weniger gegen Heißhunger.</div>
-          </div>
-        </div>
-      </div>
+      <img src="../../assets/geschmacksbombe.jpeg" alt="Geschmacksbombe Advertorial" class="article-img">
 
-      <p>Die Kombination beider Wirkstoffe macht etwas, das keine andere Lösung auf dem Markt in dieser Form tut: Sie befriedigt die Rezeptoren vollständig. Sie unterstützt das Sättigungssignal. Und sie tut das bei <strong>4,5 Kalorien pro Portion</strong>.</p>
-      <p>Es ist nicht der alte Ansatz – ersetze Zucker durch etwas Ähnlicheres. Es ist ein grundlegend anderer Mechanismus: <strong>Gib deinem Gehirn das Signal, das es braucht, um aufzuhören zu fordern.</strong></p>
-      <p>Bei meiner Suche nach einem Produkt, das genau diesen Mechanismus nutzt – mit der richtigen Wirkstoffkombination, sauber formuliert, ohne Kompromisse beim Geschmack – bin ich auf die <strong>Geschmacksbombe</strong> gestoßen.</p>
+      <h2>Der entscheidende Unterschied zu anderen Zuckeralternativen</h2>
 
-      <!-- INLINE IMAGE 3 -->
-      <div class="img-ph">
-        <span class="ico">📷</span>
-        <strong>BILD 3: Produktbild Geschmacksbombe</strong>
-        <span class="lbl">z.B. Dose Geschmacksbombe auf Holzuntergrund / Flatlay mit Quark und Beeren</span>
-      </div>
+      <p>Stevia, Erythrit, Zuckeralkohole – sie alle arbeiten um das Problem herum. Sie stimulieren die Rezeptoren unvollständig, hinterlassen Nachgeschmack oder Verdauungsprobleme, und adressieren nicht, was im Körper wirklich passiert. Sie erzeugen keinen echten Abschluss. Nur einen Kompromiss, der sich täglich wiederholt.</p>
+      <p>Die Geschmacksbombe macht etwas anderes: Sie befriedigt die Süßrezeptoren vollständig. Sie unterstützt das natürliche Sättigungssignal über den Darm. Und sie tut das, ohne den Blutzucker zu belasten, ohne Nachgeschmack, ohne Kampf.</p>
+      <p>Stell dir vor, du müsstest nicht mehr stark sein. Sondern einfach aufhören, gegen deinen eigenen Körper zu arbeiten. Das ist der Unterschied.</p>
 
+      <img src="../../assets/zuckeralternativen.jpeg" alt="Geschmacksbombe Advertorial" class="article-img">
       <hr>
 
       <h2>Was ich nicht erwartet hatte – mein ehrlicher Selbsttest</h2>
@@ -717,7 +718,7 @@
         <p>Ich fange immer mit dem Kaffee an. Nicht weil er der wichtigste Test ist, sondern weil er der ehrlichste ist. Jeden Morgen, ungefähr zur selben Zeit, auf nüchternen Magen. Kein Ablenkungsmanöver durch Hunger oder Mittagsstimmung.</p>
         <p>Ich gab eine kleine Menge des Pulvers in meinen Kaffee – deutlich weniger, als ich intuitiv gewollt hätte – und rührte um.</p>
         <p>Der erste Schluck: süß. Wirklich süß. Nicht „Stevia-süß" mit dem unangenehmen Unterton, den ich so gut kenne. Keine Bitterkeit im Abgang. Kein lakritzartiger Nachklang, der einem das Getränk verleidet. Einfach: süß.</p>
-        <p>Ich saß da und wartete auf den Haken. Er kam nicht. Was ich stattdessen bemerkte: Ich trank meinen Kaffee langsamer als sonst. Genoss ihn. Hatte danach keine Lust auf etwas Süßes obendrauf.</p>
+        <p>Ich saß da und wartete auf den Haken. Er kam nicht. Was ich stattdessen bemerkte: Ich trank meinen Kaffee langsamer als sonst. Genoss ihn. Hatte danach keine Lust auf etwas Süßes obendrauf – was bei mir nach einem „gesunden" Frühstück ohne Zucker bisher fast immer der Fall war.</p>
       </div>
 
       <div class="woche-item">
@@ -736,7 +737,7 @@
         <p>Backen ohne Zucker ist eine Wissenschaft für sich. Zucker ist nicht nur Süße. Er ist Struktur, Karamellisierung, Feuchtigkeit. Wer das einfach weglässt oder schlecht ersetzt, bekommt trockene Kuchen und gummiartige Kekse.</p>
         <p>Ich machte Proteinpancakes – mein Standardrezept, das ich normalerweise mit einem Esslöffel Zucker zubereite. Diesmal nur das Pulver.</p>
         <p>Das Ergebnis: gleichmäßig gebräunt, innen weich, geschmacklich überzeugend. Mein Mann – der von dem ganzen Experiment wusste und entsprechend kritisch testete – aß drei Stück und fragte, ob noch welche übrig seien.</p>
-        <p>Ich sage nicht, dass jedes Rezept auf Anhieb perfekt klappt. Es braucht manchmal eine kleine Anpassung. Aber der Grundmechanismus funktioniert.</p>
+        <p>Ich sage nicht, dass jedes Rezept auf Anhieb perfekt klappt. Es braucht manchmal eine kleine Anpassung. Aber der Grundmechanismus funktioniert – und das hatte ich ehrlich gesagt nicht vollständig erwartet.</p>
       </div>
 
       <div class="woche-item">
@@ -749,11 +750,7 @@
       </div>
 
       <!-- INLINE IMAGE 4 -->
-      <div class="img-ph">
-        <span class="ico">📷</span>
-        <strong>BILD 4: Alltagsmomente mit Geschmacksbombe</strong>
-        <span class="lbl">z.B. Quark mit Beeren / Kaffee am Morgen / Pancakes / Proteinshake – Lifestyle</span>
-      </div>
+      <img src="../../assets/bild-test.jpeg" alt="Geschmacksbombe Advertorial" class="article-img">
 
       <hr>
 
@@ -779,11 +776,7 @@
       </div>
 
       <!-- INLINE IMAGE 5 -->
-      <div class="img-ph">
-        <span class="ico">📷</span>
-        <strong>BILD 5: Community / Zufriedene Kundinnen</strong>
-        <span class="lbl">z.B. Frauen beim Training / Fitness-Lifestyle / Testimonial-Collage</span>
-      </div>
+      <img src="../../assets/testimonials.jpeg" alt="Geschmacksbombe Advertorial" class="article-img">
 
       <h2>Die unbequeme Wahrheit über den Zuckerersatz-Markt</h2>
 
@@ -796,6 +789,11 @@
         <p>Zuckeralkohole in Fitnessriegeln und Low-Carb-Produkten werden als Lösung verpackt – obwohl die Verdauungsprobleme, die sie bei höherem Konsum verursachen, hinlänglich bekannt sind.</p>
         <p><strong>Was sie dir alle nicht sagen:</strong> Keine dieser Lösungen adressiert den eigentlichen Mechanismus. Sie alle arbeiten um das Problem herum – statt es an der Wurzel zu lösen.</p>
       </div>
+
+      <p>Die Geschmacksbombe ist kein weiteres Produkt in dieser Kategorie. Sie ist ein anderer Ansatz: Befriedige den Mechanismus vollständig, mit der richtigen Wirkstoffkombination, beim richtigen Kalorienwert – und höre auf, gegen deinen eigenen Körper zu arbeiten.</p>
+
+
+      <img src="../../assets/zuckerersatz.jpeg" alt="Geschmacksbombe Advertorial" class="article-img">
 
       <h2>Warum die Geschmacksbombe anders ist – ein ehrlicher Vergleich</h2>
 
@@ -846,11 +844,7 @@
       <p>Pro 200g-Packung sind über 66 Portionen enthalten. Wer einmal rechnet, merkt schnell: Eine Portion kostet weniger als ein einzelnes Stück Schokolade aus dem Supermarkt. Und sie bewirkt das Gegenteil davon.</p>
 
       <!-- INLINE IMAGE 6 -->
-      <div class="img-ph">
-        <span class="ico">📷</span>
-        <strong>BILD 6: Anwendung im Alltag</strong>
-        <span class="lbl">z.B. Proteinshake / Quark mit Geschmacksbombe / Backen / Kaffee-Moment</span>
-      </div>
+      <img src="../../assets/bild-6.jpeg" alt="Geschmacksbombe im Alltag" class="article-img">
 
       <h2>Mein persönliches Fazit – warum ich nicht zurückgegangen bin</h2>
 
@@ -863,7 +857,6 @@
         <li>✅ Mein Kaffee ist süß – ohne Nachgeschmack, ohne schlechtes Gewissen</li>
         <li>✅ Ich backe wieder – und das Ergebnis schmeckt wie immer</li>
         <li>✅ Ich greife nicht mehr abends zur Schokolade – weil der Impuls schlicht ausbleibt</li>
-        <li>✅ Ich tracke meine Kalorien – und verschwende keine davon für Süße</li>
         <li>✅ Meine Jeans passt wieder – ohne dass ich einen einzigen Tag gehungert habe</li>
         <li>✅ Hergestellt in Deutschland, laborgeprüft, 100% vegan und glutenfrei</li>
       </ul>
@@ -874,17 +867,18 @@
 
     <!-- ═══ UPDATE BOX ═══ -->
     <div class="update-box">
-      <div class="update-label">🔔 Update – 14. Februar 2026</div>
+      <div class="update-label">🔔 Update – 21. Februar 2026</div>
       <h3>Wegen der großen Nachfrage unserer Leserinnen und Leser</h3>
       <p>Nach zahlreichen Nachrichten haben wir direkt Kontakt mit dem Hersteller aufgenommen. Die häufigste Frage war dieselbe: <em>„Wo bekomme ich die Geschmacksbombe zum besten Preis?"</em></p>
       <p>Weil uns die Ernährungsziele unserer Community am Herzen liegen, haben wir exklusive Konditionen für unsere Leserinnen und Leser ausgehandelt – besser als die regulären Preise auf der Website.</p>
       <p><strong>Für kurze Zeit exklusiv:</strong></p>
       <ul class="update-perks">
-        <li>4er-Set Geschmacksbombe mit <strong>26% Ersparnis</strong></li>
-        <li>Gratis Rezeptbuch (PDF, Wert 9,95€) inklusive</li>
+        <li>4er-Set Geschmacksbombe mit <strong>35% Ersparnis</strong></li>
+        <li>Gratis Rezeptbuch mit 45+ Rezepten inklusive</li>
+        <li>Gratis Shaker inklusive</li>
         <li>Zwei Gratis-Proben im Lieferumfang</li>
-        <li>14 Tage Geld-zurück-Garantie</li>
-        <li>Kostenloser Versand ab 60€</li>
+        <li>Kostenloser Versand</li>
+        <li>30 Tage Geld-zurück-Garantie</li>
         <li>Zahlung auf Rechnung via Klarna oder PayPal möglich</li>
       </ul>
       <p class="update-note">⚠️ Hinweis: Da wir nur ein begrenztes Kontingent zu diesen Konditionen sichern konnten, empfehlen wir schnelles Handeln. Das Angebot gilt nur, solange der Vorrat reicht.</p>
@@ -895,16 +889,11 @@
       <div class="product-badge">🏆 Testsieger · Platz 1</div>
       <div class="product-name">Geschmacksbombe</div>
       <div class="product-tagline">Der Zuckerersatz, der wirklich funktioniert – hergestellt in Deutschland</div>
-
-      <div class="product-img-ph">
-        <span class="ico">📷</span>
-        <strong>PRODUKTBILD</strong>
-        <span class="lbl">Geschmacksbombe Dose / 4er-Set Packshot<br>Empfehlung: heller Hintergrund, freigestellt oder Lifestyle</span>
-      </div>
+      <img src="../../assets/produktbild.jpeg" alt="Geschmacksbombe im Alltag" class="article-img">
 
       <div class="rating-row">
         <span class="rating-stars">★★★★★</span>
-        <span>4,9 / 5 · Über 47.500 Kunden</span>
+        <span>4,9 / 5 · Über 47.531 Bewertungen</span>
       </div>
 
       <ul class="feature-list">
@@ -914,8 +903,8 @@
         <li><span class="chk">✓</span>Kein bitterer Nachgeschmack – funktioniert in Shakes, Quark, Kaffee und beim Backen</li>
         <li><span class="chk">✓</span>100% vegan, glutenfrei, für Diabetiker geeignet</li>
         <li><span class="chk">✓</span>Hergestellt in Deutschland, laborgeprüft und zertifiziert</li>
-        <li><span class="chk">✓</span>Bis zu 26% Rabatt im 4er-Set</li>
-        <li><span class="chk">✓</span>14 Tage Geld-zurück-Garantie</li>
+        <li><span class="chk">✓</span>Bis zu 35% Rabatt im 4er-Set</li>
+        <li><span class="chk">✓</span>30 Tage Geld-zurück-Garantie</li>
       </ul>
 
       <div class="pros-cons">
@@ -938,9 +927,8 @@
         </div>
       </div>
 
-      <a href="HIER-AFFILIATE-LINK-EINFÜGEN" class="btn-primary">🛒 Jetzt Geschmacksbombe testen – 26% Rabatt im 4er-Set</a>
-      <a href="HIER-AMAZON-LINK-EINFÜGEN" class="btn-secondary">Auf Amazon ansehen · Normalpreis</a>
-      <div class="guarantee-note">🔒 14 Tage Geld-zurück-Garantie · Versand ab 60€ kostenlos</div>
+      <a href="/magazin/heisshunger-quiz/lp/" class="btn-primary">🛒 Jetzt Geschmacksbombe testen – 35% Rabatt im 4er-Set</a>
+      <div class="guarantee-note">🔒 30 Tage Geld-zurück-Garantie · Versand im 4er Set kostenlos</div>
     </div>
 
     <!-- ═══ ÜBER DAS UNTERNEHMEN ═══ -->
@@ -991,12 +979,12 @@
 
 <!-- ═══ FOOTER ═══ -->
 <footer class="site-footer">
-  <span class="footer-logo">The Fit<span>Protocol</span></span>
+    <a href="../../" class="footer-logo"><img src="../../assets/logo.png" alt="The Fit Protocol" style="height:36px;width:auto;display:block;"></a> 
+
   <div>© 2026, The Fit Protocol</div>
   <div class="footer-links">
     <a href="../../impressum/">Impressum</a>
     <a href="../../datenschutz/">Datenschutz</a>
-    <a href="../../">Magazin</a>
   </div>
 </footer>
 
