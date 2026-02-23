@@ -1612,6 +1612,82 @@ function goToSlide(index) {
   <div class="footer-disc">Disclaimer: Dieser Artikel dient ausschließlich der Information und Unterhaltung. Beschriebene Kundenstimmen oder Erfahrungsberichte können exemplarisch sein. Die dargestellten Inhalte ersetzen keine ärztliche Beratung und stellen kein Heilversprechen dar. Alle Hinweise zu möglichen Wirkungen beziehen sich auf allgemein bekannte, wissenschaftlich beschriebene Eigenschaften einzelner Inhaltsstoffe. Individuelle Ergebnisse können variieren. Es handelt sich bei diesem Artikel um ein Advertorial, welches Affiliate-Links enthalten kann.</div>
   <div class="footer-links"><a href="#">Impressum</a><a href="#">Datenschutz</a></div>
 </footer>
+<script>
+(function () {
+  function getCookie(name) {
+    var match = document.cookie.match(new RegExp('(?:^|; )' + name.replace(/([.$?*|{}()[\]\\/+^])/g, '\\$1') + '=([^;]*)'));
+    return match ? decodeURIComponent(match[1]) : null;
+  }
+
+  function getParam(name) {
+    try { return new URL(window.location.href).searchParams.get(name); }
+    catch (e) { return null; }
+  }
+
+  function setCookie(name, value, maxAgeSeconds) {
+    var parts = [
+      name + '=' + encodeURIComponent(value),
+      'path=/',
+      'max-age=' + (maxAgeSeconds || 7776000),
+      'samesite=lax'
+    ];
+    if (window.location.protocol === 'https:') parts.push('secure');
+    document.cookie = parts.join('; ');
+  }
+
+  function ensureFbc() {
+    var existing = getCookie('_fbc');
+    if (existing) return existing;
+
+    var fbclid = getParam('fbclid');
+    if (!fbclid) return null;
+
+    var fbc = 'fb.1.' + Date.now() + '.' + fbclid;
+    setCookie('_fbc', fbc, 7776000);
+    return fbc;
+  }
+
+  // Expose globally so addToCart() can use it
+  window.trackMetaEvent = function trackMetaEvent(opts) {
+    var eventName = opts.event_name;
+    var webhookUrl = opts.webhook_url;
+    var customData = opts.custom_data || {};
+
+    var eventId = (opts.event_id_prefix || eventName.toLowerCase()) + '-' + Math.random().toString(36).substring(2, 12);
+
+    // Pixel
+    if (typeof fbq === 'function') {
+      fbq('track', eventName, customData, { eventID: eventId });
+    }
+
+    // Webhook (Make -> CAPI)
+    var payload = {
+      event_name: eventName,
+      event_id: eventId,
+      event_time: Math.floor(Date.now() / 1000),
+      action_source: 'website',
+      event_source_url: window.location.href,
+      referrer: document.referrer || null,
+      client_user_agent: navigator.userAgent,
+      fbp: getCookie('_fbp'),
+      fbc: ensureFbc(),
+      fbclid: getParam('fbclid'),
+      custom_data: customData
+    };
+
+    try {
+      fetch(webhookUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+        keepalive: true
+      }).catch(function () {});
+    } catch (e) {}
+
+    return eventId; // falls du loggen willst
+  };
+})();
+</script>
 
 <script>
 const PRODUCTS = {
@@ -1708,23 +1784,80 @@ function addToCart(bundleSize) {
   console.log('📋 Variant Counts:', variantCounts);
 
   // InitiateCheckout Tracking
-  var eventId = 'checkout-' + Math.random().toString(36).substring(2, 12);
-  if (typeof fbq === 'function') {
-    fbq('track', 'InitiateCheckout', {}, { eventID: eventId });
+  // InitiateCheckout Tracking (Pixel + Make/CAPI)
+  function getCookie(name) {
+    var m = document.cookie.match(new RegExp('(?:^|; )' + name.replace(/([.$?*|{}()[\]\\/+^])/g, '\\$1') + '=([^;]*)'));
+    return m ? decodeURIComponent(m[1]) : null;
   }
+
+  function getParam(name) {
+    try { return new URL(window.location.href).searchParams.get(name); }
+    catch (e) { return null; }
+  }
+
+  function setCookie(name, value, maxAgeSeconds) {
+    var parts = [
+      name + '=' + encodeURIComponent(value),
+      'path=/',
+      'max-age=' + (maxAgeSeconds || 7776000),
+      'samesite=lax'
+    ];
+    if (window.location.protocol === 'https:') parts.push('secure');
+    document.cookie = parts.join('; ');
+  }
+
+  function ensureFbc() {
+    var existing = getCookie('_fbc');
+    if (existing) return existing;
+
+    var fbclid = getParam('fbclid');
+    if (!fbclid) return null;
+
+    var fbc = 'fb.1.' + Date.now() + '.' + fbclid;
+    setCookie('_fbc', fbc, 7776000);
+    return fbc;
+  }
+
+  var eventId = 'checkout-' + Math.random().toString(36).substring(2, 12);
+
+  // Optional aber empfehlenswert: Custom Data fürs Matching/Reporting
+  var valueMap = { '2er': 29.95, '4er': 63.60, '6er': 95.40 };
+  var customData = {
+    currency: 'EUR',
+    value: valueMap[bundleSize] || undefined,
+    num_items: variants.length,
+    content_type: 'product',
+    content_ids: variants
+  };
+
+  // Pixel (Browser)
+  if (typeof fbq === 'function') {
+    fbq('track', 'InitiateCheckout', customData, { eventID: eventId });
+  }
+
+  // Webhook (Make -> CAPI)
   fetch('https://hook.eu2.make.com/3twik1k3nvgvm8d9r91adyu3nwjki8xs', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
+    keepalive: true,
     body: JSON.stringify({
       trigger: true,
       event_name: 'InitiateCheckout',
+      event_id: eventId,
+      event_time: Math.floor(Date.now() / 1000),
+      action_source: 'website',
+      event_source_url: window.location.href,
+      referrer: document.referrer || null,
       client_user_agent: navigator.userAgent,
-      event_id: eventId
+      fbp: getCookie('_fbp'),
+      fbc: ensureFbc(),
+      fbclid: getParam('fbclid'),
+      custom_data: customData
     })
   }).catch(function() {});
 
   // Redirect zum Checkout
-  setTimeout(function() { window.location.href = cartUrl; }, 200);
+  setTimeout(function() { window.location.href = cartUrl; }, 250);
 }
 
 // Plan Selector (für die obere Auswahl-Section)
