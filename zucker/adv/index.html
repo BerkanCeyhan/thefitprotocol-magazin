@@ -1005,27 +1005,95 @@
 
 <!-- Lead Tracking -->
 <script>
-document.querySelectorAll('.btn-primary').forEach(function(btn) {
-  btn.addEventListener('click', function(e) {
-    e.preventDefault();
+(function () {
+  function getCookie(name) {
+    var match = document.cookie.match(new RegExp('(?:^|; )' + name.replace(/([.$?*|{}()[\]\\/+^])/g, '\\$1') + '=([^;]*)'));
+    return match ? decodeURIComponent(match[1]) : null;
+  }
+
+  function getParam(name) {
+    try {
+      return new URL(window.location.href).searchParams.get(name);
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function setCookie(name, value, maxAgeSeconds) {
+    var parts = [
+      name + '=' + encodeURIComponent(value),
+      'path=/',
+      'max-age=' + (maxAgeSeconds || 7776000), // default: 90 Tage
+      'samesite=lax'
+    ];
+    // Nur wenn https:
+    if (window.location.protocol === 'https:') parts.push('secure');
+    document.cookie = parts.join('; ');
+  }
+
+  function ensureFbc() {
+    // Wenn Meta schon _fbc gesetzt hat, nutzen
+    var existing = getCookie('_fbc');
+    if (existing) return existing;
+
+    // Sonst aus fbclid bauen, falls vorhanden
+    var fbclid = getParam('fbclid');
+    if (!fbclid) return null;
+
+    var fbc = 'fb.1.' + Date.now() + '.' + fbclid;
+    setCookie('_fbc', fbc, 7776000);
+    return fbc;
+  }
+
+  function sendLead(btn) {
     var href = btn.href;
     var eventId = 'lead-' + Math.random().toString(36).substring(2, 12);
+
+    // Pixel event (Browser)
     if (typeof fbq === 'function') {
       fbq('track', 'Lead', {}, { eventID: eventId });
     }
+
+    // Cookies / Params für Match Quality
+    var fbp = getCookie('_fbp');
+    var fbc = ensureFbc();
+    var fbclid = getParam('fbclid'); // optional zum Debug/Tracking
+
+    var payload = {
+      trigger: true,
+      event_name: 'Lead',
+      event_id: eventId,
+      event_time: Math.floor(Date.now() / 1000),
+      action_source: 'website',
+      event_source_url: window.location.href,
+      referrer: document.referrer || null,
+      client_user_agent: navigator.userAgent,
+      fbp: fbp,
+      fbc: fbc,
+      fbclid: fbclid
+    };
+
+    // Webhook to Make (Server sends CAPI)
     fetch('https://hook.eu2.make.com/pr5axrntnbdswv41mq6x5jnxwryiw7qg', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        trigger: true,
-        event_name: 'Lead',
-        client_user_agent: navigator.userAgent,
-        event_id: eventId
-      })
-    }).catch(function() {});
-    setTimeout(function() { window.location.href = href; }, 200);
+      body: JSON.stringify(payload),
+      keepalive: true
+    }).catch(function () {});
+
+    // Weiterleitung (kurz warten)
+    setTimeout(function () {
+      window.location.href = href;
+    }, 250);
+  }
+
+  document.querySelectorAll('.btn-primary').forEach(function (btn) {
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      sendLead(btn);
+    });
   });
-});
+})();
 </script>
 
 </body>
