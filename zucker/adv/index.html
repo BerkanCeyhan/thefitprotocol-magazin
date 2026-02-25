@@ -1070,6 +1070,11 @@
       fbq('track', 'Lead', {}, { eventID: eventId });
     }
 
+    // Taboola lead event
+    if (window._tfa) {
+      window._tfa.push({notify: 'event', name: 'lead', id: 1627824});
+    }
+
     // Cookies / Params für Match Quality
     var fbp = getCookie('_fbp');
     var fbc = ensureFbc();
