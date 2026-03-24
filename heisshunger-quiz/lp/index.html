@@ -1083,6 +1083,83 @@ src="https://www.facebook.com/tr?id=458434359587251&ev=PageView&noscript=1"/></n
   animation: picker-shake 0.32s ease;
   border-color: var(--pink) !important;
 }
+/* ─── STEPPER ROWS (desktop) ─── */
+.stepper-rows-wrap {
+  display: none;
+}
+.stepper-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.stepper-row {
+  display: flex;
+  align-items: center;
+  background: #fafafa;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  padding: 7px 10px;
+  transition: border-color 0.2s, background 0.2s;
+  gap: 6px;
+}
+.stepper-row.has-selection {
+  border-color: var(--purple);
+  background: #f5f3ff;
+}
+.stepper-emoji {
+  font-size: 18px;
+  width: 24px;
+  text-align: center;
+  flex-shrink: 0;
+}
+.stepper-name {
+  flex: 1;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.2;
+}
+.stepper-controls {
+  display: flex;
+  align-items: center;
+  background: white;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.stepper-btn {
+  width: 30px;
+  height: 30px;
+  background: none;
+  border: none;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--purple);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.12s;
+  line-height: 1;
+  padding: 0;
+}
+.stepper-btn:active { background: #ede9ff; }
+.stepper-btn:disabled { color: #ccc; cursor: default; }
+.stepper-count {
+  min-width: 22px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+  pointer-events: none;
+}
+/* Mobile: Bild-Grid | Desktop: Stepper-Liste */
+@media (min-width: 768px) {
+  .picker-grid { display: none !important; }
+  .stepper-rows-wrap { display: block; }
+}
 .bundle-savings {
   text-align: center;
   font-size: 14px;
@@ -1652,6 +1729,7 @@ const FLAVOR_IMAGES = {
   '43528505590024': 'https://cdn.shopify.com/s/files/1/0552/2227/2083/files/17_3851e7df-91fe-4e2d-b884-7e420123e3f7_1.png?v=1737497782'
 };
 
+// Mobile: Tap-Toggle
 function toggleFlavor(bundle, variantId) {
   var state = flavorState[bundle];
   var maxSize = BUNDLE_SIZES[bundle];
@@ -1664,15 +1742,33 @@ function toggleFlavor(bundle, variantId) {
     if (total >= maxSize) {
       var picker = document.getElementById('picker-' + bundle);
       if (picker) {
-        var item = picker.querySelector('[data-variant="' + variantId + '"]');
-        if (item) {
-          item.classList.add('shake');
-          setTimeout(function() { item.classList.remove('shake'); }, 350);
+        var el = picker.querySelector('.picker-item[data-variant="' + variantId + '"]');
+        if (el) {
+          el.classList.add('shake');
+          setTimeout(function() { el.classList.remove('shake'); }, 350);
         }
       }
       return;
     }
     state[variantId] = 1;
+  }
+  updatePickerUI(bundle);
+}
+
+// Desktop: +/- Stepper
+function stepFlavor(bundle, variantId, delta) {
+  var state = flavorState[bundle];
+  var maxSize = BUNDLE_SIZES[bundle];
+  var current = state[variantId] || 0;
+  var total = Object.values(state).reduce(function(a, b) { return a + b; }, 0);
+
+  if (delta > 0 && total >= maxSize) return;
+  var newCount = Math.max(0, current + delta);
+
+  if (newCount === 0) {
+    delete state[variantId];
+  } else {
+    state[variantId] = newCount;
   }
   updatePickerUI(bundle);
 }
@@ -1686,6 +1782,7 @@ function updatePickerUI(bundle) {
   var picker = document.getElementById('picker-' + bundle);
   if (!picker) return;
 
+  // Mobile: Bild-Grid
   picker.querySelectorAll('.picker-item').forEach(function(item) {
     var variantId = item.dataset.variant;
     var count = state[variantId] || 0;
@@ -1693,10 +1790,22 @@ function updatePickerUI(bundle) {
     item.classList.toggle('dimmed', complete && count === 0);
   });
 
+  // Desktop: Stepper-Zeilen
+  picker.querySelectorAll('.stepper-row').forEach(function(row) {
+    var variantId = row.dataset.variant;
+    var count = state[variantId] || 0;
+    row.querySelector('.stepper-count').textContent = count;
+    row.classList.toggle('has-selection', count > 0);
+    row.querySelector('.stepper-btn.minus').disabled = count === 0;
+    row.querySelector('.stepper-btn.plus').disabled = total >= maxSize;
+  });
+
+  // Dots
   picker.querySelectorAll('.picker-dot').forEach(function(dot, i) {
     dot.classList.toggle('filled', i < total);
   });
 
+  // Fortschrittstext
   var progressText = picker.querySelector('.picker-progress-text');
   if (complete) {
     progressText.textContent = '✓ Auswahl komplett!';
@@ -1706,6 +1815,7 @@ function updatePickerUI(bundle) {
     progressText.classList.remove('complete');
   }
 
+  // CTA-Button
   var bundleBody = picker.closest('.bundle-body');
   if (bundleBody) {
     var btn = bundleBody.querySelector('.btn');
@@ -1726,14 +1836,30 @@ function buildPickers() {
     var dots = '';
     for (var d = 0; d < size; d++) dots += '<span class="picker-dot"></span>';
 
-    var items = '';
+    // Mobile: Bild-Grid
+    var gridItems = '';
     FLAVOR_LIST.forEach(function(f) {
       var imgUrl = FLAVOR_IMAGES[f.id] || '';
-      items +=
+      gridItems +=
         '<div class="picker-item" data-variant="' + f.id + '" onclick="toggleFlavor(\'' + bundle + '\',\'' + f.id + '\')">' +
           '<img class="picker-img" src="' + imgUrl + '" alt="' + f.name + '" loading="lazy">' +
           '<div class="picker-check">✓</div>' +
           '<div class="picker-label">' + f.emoji + ' ' + f.name + '</div>' +
+        '</div>';
+    });
+
+    // Desktop: Stepper-Zeilen
+    var stepperRows = '';
+    FLAVOR_LIST.forEach(function(f) {
+      stepperRows +=
+        '<div class="stepper-row" data-variant="' + f.id + '">' +
+          '<span class="stepper-emoji">' + f.emoji + '</span>' +
+          '<span class="stepper-name">' + f.name + '</span>' +
+          '<div class="stepper-controls">' +
+            '<button class="stepper-btn minus" onclick="stepFlavor(\'' + bundle + '\',\'' + f.id + '\',-1)">−</button>' +
+            '<span class="stepper-count">0</span>' +
+            '<button class="stepper-btn plus" onclick="stepFlavor(\'' + bundle + '\',\'' + f.id + '\',1)">+</button>' +
+          '</div>' +
         '</div>';
     });
 
@@ -1742,7 +1868,8 @@ function buildPickers() {
         '<span class="picker-progress-text">0 von ' + size + ' gewählt</span>' +
         '<div class="picker-dots">' + dots + '</div>' +
       '</div>' +
-      '<div class="picker-grid">' + items + '</div>';
+      '<div class="picker-grid">' + gridItems + '</div>' +
+      '<div class="stepper-rows-wrap"><div class="stepper-rows">' + stepperRows + '</div></div>';
 
     updatePickerUI(bundle);
   });
