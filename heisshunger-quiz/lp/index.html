@@ -817,7 +817,7 @@ src="https://www.facebook.com/tr?id=458434359587251&ev=PageView&noscript=1"/></n
   <li><div class="chk-blue">✓</div><span class="inc-label">2x Geschmacksbombe<span class="val-pink">(Wert: 31,8€)</span></span></li>
   <li><div class="chk-blue">✓</div><span class="inc-label">Versandkosten<span class="val-pink">4,99€</span></span></li>
 </ul>
-        <div id="stepper-2er" class="flavor-stepper"></div>
+        <div id="picker-2er" class="flavor-picker"></div>
         <button class="btn btn-center" onclick="addToCart('2er')">JETZT HEIßHUNGER BESIEGEN</button>
       </div>
     </div>
@@ -843,7 +843,7 @@ src="https://www.facebook.com/tr?id=458434359587251&ev=PageView&noscript=1"/></n
   <li><div class="chk-blue">✓</div><span class="inc-label">Premium Versand<span class="val-pink">GRATIS (Wert: 4,99€)</span></span></li>
   <li><span class="inc-label">🎁 + 2 ZUFÄLLIGE PROBEN<span class="val-pink">GRATIS</span></span></li>
 </ul>
-        <div id="stepper-4er" class="flavor-stepper"></div>
+        <div id="picker-4er" class="flavor-picker"></div>
         <button class="btn btn-center" onclick="addToCart('4er')">JETZT HEIßHUNGER BESIEGEN</button>
         <p class="bundle-savings">Du sparst €39,79 + Gratis Versand</p>
       </div>
@@ -869,7 +869,7 @@ src="https://www.facebook.com/tr?id=458434359587251&ev=PageView&noscript=1"/></n
   <li><div class="chk-blue">✓</div><span class="inc-label">Premium Versand<span class="val-pink">GRATIS (Wert: 4,99€)</span></span></li>
   <li><span class="inc-label">🎁 + 2 ZUFÄLLIGE PROBEN<span class="val-pink">GRATIS</span></span></li>
 </ul>
-        <div id="stepper-6er" class="flavor-stepper"></div>
+        <div id="picker-6er" class="flavor-picker"></div>
         <button class="btn btn-center" onclick="addToCart('6er')">JETZT HEIßHUNGER BESIEGEN</button>
         <p class="bundle-savings">Du sparst €37,29 + Gratis Versand</p>
       </div>
@@ -966,12 +966,12 @@ src="https://www.facebook.com/tr?id=458434359587251&ev=PageView&noscript=1"/></n
     transform: scale(1.02);
   }
 }
-/* ─── FLAVOR STEPPER ─── */
-.flavor-stepper {
+/* ─── FLAVOR PICKER ─── */
+.flavor-picker {
   margin-top: 4px;
   margin-bottom: 4px;
 }
-.stepper-progress-bar {
+.picker-progress {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -980,103 +980,108 @@ src="https://www.facebook.com/tr?id=458434359587251&ev=PageView&noscript=1"/></n
   padding: 9px 14px;
   margin-bottom: 10px;
 }
-.stepper-progress-text {
+.picker-progress-text {
   font-size: 13px;
   font-weight: 700;
   color: #888;
   transition: color 0.2s;
 }
-.stepper-progress-text.complete {
+.picker-progress-text.complete {
   color: var(--purple);
 }
-.stepper-dots {
+.picker-dots {
   display: flex;
   gap: 5px;
   flex-shrink: 0;
 }
-.stepper-dot {
+.picker-dot {
   width: 10px;
   height: 10px;
   border-radius: 50%;
   background: #ddd;
   transition: background 0.2s, transform 0.15s;
 }
-.stepper-dot.filled {
+.picker-dot.filled {
   background: var(--purple);
   transform: scale(1.15);
 }
-.stepper-rows {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-.stepper-row {
-  display: flex;
-  align-items: center;
-  background: #fafafa;
-  border: 1.5px solid var(--border);
-  border-radius: 10px;
-  padding: 7px 10px;
-  transition: border-color 0.2s, background 0.2s;
+.picker-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 6px;
 }
-.stepper-row.has-selection {
-  border-color: var(--purple);
-  background: #f5f3ff;
-}
-.stepper-emoji {
-  font-size: 18px;
-  width: 24px;
-  text-align: center;
-  flex-shrink: 0;
-}
-.stepper-name {
-  flex: 1;
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--text);
-  line-height: 1.2;
-}
-.stepper-controls {
-  display: flex;
-  align-items: center;
-  background: white;
-  border: 1.5px solid var(--border);
-  border-radius: 8px;
-  overflow: hidden;
-  flex-shrink: 0;
-}
-.stepper-btn {
-  width: 30px;
-  height: 30px;
-  background: none;
-  border: none;
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--purple);
+.picker-item {
+  position: relative;
   cursor: pointer;
-  display: flex;
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  background: white;
+  transition: border-color 0.15s, opacity 0.15s, transform 0.1s;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.picker-item:active {
+  transform: scale(0.95);
+}
+.picker-item.selected {
+  border-color: var(--purple);
+}
+.picker-item.dimmed {
+  opacity: 0.35;
+  pointer-events: none;
+}
+.picker-img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  display: block;
+}
+.picker-label {
+  font-size: 9.5px;
+  font-weight: 700;
+  color: var(--text);
+  text-align: center;
+  padding: 4px 3px 5px;
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.picker-item.selected .picker-label {
+  color: var(--purple);
+  background: #f0edff;
+}
+.picker-check {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 19px;
+  height: 19px;
+  background: var(--purple);
+  color: white;
+  border-radius: 50%;
+  font-size: 11px;
+  font-weight: 900;
+  display: none;
   align-items: center;
   justify-content: center;
-  -webkit-tap-highlight-color: transparent;
-  transition: background 0.12s;
   line-height: 1;
-  padding: 0;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.18);
 }
-.stepper-btn:active {
-  background: #ede9ff;
+.picker-item.selected .picker-check {
+  display: flex;
 }
-.stepper-btn:disabled {
-  color: #ccc;
-  cursor: default;
+@keyframes picker-shake {
+  0%, 100% { transform: translateX(0); }
+  20%       { transform: translateX(-5px); }
+  40%       { transform: translateX(5px); }
+  60%       { transform: translateX(-5px); }
+  80%       { transform: translateX(5px); }
 }
-.stepper-count {
-  min-width: 22px;
-  text-align: center;
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--text);
-  pointer-events: none;
+.picker-item.shake {
+  animation: picker-shake 0.32s ease;
+  border-color: var(--pink) !important;
 }
 .bundle-savings {
   text-align: center;
@@ -1613,7 +1618,7 @@ const BUNDLE_BONUSES = {
   '6er': ['shaker', 'rezeptbuch']  // 6er-Set bekommt beides GRATIS
 };
 
-// ─── FLAVOR STEPPER ───
+// ─── FLAVOR PICKER ───
 const BUNDLE_SIZES = { '2er': 2, '4er': 4, '6er': 6 };
 const flavorState = { '2er': {}, '4er': {}, '6er': {} };
 
@@ -1632,49 +1637,67 @@ const FLAVOR_LIST = [
   { name: 'Vanille',             emoji: '🍨', id: '43528505590024' }
 ];
 
-function stepFlavor(bundle, variantId, delta) {
-  const state = flavorState[bundle];
-  const maxSize = BUNDLE_SIZES[bundle];
-  const current = state[variantId] || 0;
-  const total = Object.values(state).reduce((a, b) => a + b, 0);
+const FLAVOR_IMAGES = {
+  '50647839310088': 'https://cdn.shopify.com/s/files/1/0552/2227/2083/files/27.jpg?v=1737536475',
+  '39608308269139': 'https://cdn.shopify.com/s/files/1/0552/2227/2083/files/9_89573c2d-9cba-45d6-b909-213e03bb875c.png?v=1737585945',
+  '39608308236371': 'https://cdn.shopify.com/s/files/1/0552/2227/2083/files/8_9985277f-89f1-4ec1-859b-ceaede9bca14.png?v=1737585945',
+  '39608308301907': 'https://cdn.shopify.com/s/files/1/0552/2227/2083/files/10_5ec2c3d9-4e4c-4a8f-9168-c33a14735feb.png?v=1737585945',
+  '39608308334675': 'https://cdn.shopify.com/s/files/1/0552/2227/2083/files/11_03af6eb2-ee74-4533-aa61-3e0653c117c5.png?v=1737585945',
+  '43528511553800': 'https://cdn.shopify.com/s/files/1/0552/2227/2083/files/16_0a016ec6-eea4-49fc-add3-6cdc271e0734.png?v=1737585945',
+  '39608308367443': 'https://cdn.shopify.com/s/files/1/0552/2227/2083/files/12_8a3c0be0-008d-4cde-9f48-3f24095a3d58.png?v=1737585945',
+  '43528504082696': 'https://cdn.shopify.com/s/files/1/0552/2227/2083/files/18_51640b51-5ad6-43c5-85c8-9f7645335521.png?v=1737585945',
+  '50647839342856': 'https://cdn.shopify.com/s/files/1/0552/2227/2083/files/28.jpg?v=1737585945',
+  '39608308432979': 'https://cdn.shopify.com/s/files/1/0552/2227/2083/files/15_cf91033d-7577-46fc-b3b4-7a4bacd97ff1.png?v=1737497782',
+  '39608308498515': 'https://cdn.shopify.com/s/files/1/0552/2227/2083/files/19_ed634019-9ca6-411b-99f6-3e39ee6d2c24.png?v=1737497782',
+  '43528505590024': 'https://cdn.shopify.com/s/files/1/0552/2227/2083/files/17_3851e7df-91fe-4e2d-b884-7e420123e3f7_1.png?v=1737497782'
+};
 
-  if (delta > 0 && total >= maxSize) return;
-  const newCount = Math.max(0, current + delta);
+function toggleFlavor(bundle, variantId) {
+  var state = flavorState[bundle];
+  var maxSize = BUNDLE_SIZES[bundle];
+  var total = Object.values(state).reduce(function(a, b) { return a + b; }, 0);
+  var current = state[variantId] || 0;
 
-  if (newCount === 0) {
+  if (current > 0) {
     delete state[variantId];
   } else {
-    state[variantId] = newCount;
+    if (total >= maxSize) {
+      var picker = document.getElementById('picker-' + bundle);
+      if (picker) {
+        var item = picker.querySelector('[data-variant="' + variantId + '"]');
+        if (item) {
+          item.classList.add('shake');
+          setTimeout(function() { item.classList.remove('shake'); }, 350);
+        }
+      }
+      return;
+    }
+    state[variantId] = 1;
   }
-  updateStepperUI(bundle);
+  updatePickerUI(bundle);
 }
 
-function updateStepperUI(bundle) {
-  const state = flavorState[bundle];
-  const maxSize = BUNDLE_SIZES[bundle];
-  const total = Object.values(state).reduce((a, b) => a + b, 0);
-  const complete = total === maxSize;
+function updatePickerUI(bundle) {
+  var state = flavorState[bundle];
+  var maxSize = BUNDLE_SIZES[bundle];
+  var total = Object.values(state).reduce(function(a, b) { return a + b; }, 0);
+  var complete = total === maxSize;
 
-  const stepper = document.getElementById('stepper-' + bundle);
-  if (!stepper) return;
+  var picker = document.getElementById('picker-' + bundle);
+  if (!picker) return;
 
-  // Zeilen aktualisieren
-  stepper.querySelectorAll('.stepper-row').forEach(function(row) {
-    const variantId = row.dataset.variant;
-    const count = state[variantId] || 0;
-    row.querySelector('.stepper-count').textContent = count;
-    row.classList.toggle('has-selection', count > 0);
-    row.querySelector('.stepper-btn.minus').disabled = count === 0;
-    row.querySelector('.stepper-btn.plus').disabled = total >= maxSize;
+  picker.querySelectorAll('.picker-item').forEach(function(item) {
+    var variantId = item.dataset.variant;
+    var count = state[variantId] || 0;
+    item.classList.toggle('selected', count > 0);
+    item.classList.toggle('dimmed', complete && count === 0);
   });
 
-  // Dots aktualisieren
-  stepper.querySelectorAll('.stepper-dot').forEach(function(dot, i) {
+  picker.querySelectorAll('.picker-dot').forEach(function(dot, i) {
     dot.classList.toggle('filled', i < total);
   });
 
-  // Fortschrittstext
-  var progressText = stepper.querySelector('.stepper-progress-text');
+  var progressText = picker.querySelector('.picker-progress-text');
   if (complete) {
     progressText.textContent = '✓ Auswahl komplett!';
     progressText.classList.add('complete');
@@ -1683,8 +1706,7 @@ function updateStepperUI(bundle) {
     progressText.classList.remove('complete');
   }
 
-  // CTA-Button freigeben/sperren
-  var bundleBody = stepper.closest('.bundle-body');
+  var bundleBody = picker.closest('.bundle-body');
   if (bundleBody) {
     var btn = bundleBody.querySelector('.btn');
     if (btn) {
@@ -1695,40 +1717,38 @@ function updateStepperUI(bundle) {
   }
 }
 
-function buildSteppers() {
+function buildPickers() {
   ['2er', '4er', '6er'].forEach(function(bundle) {
-    var container = document.getElementById('stepper-' + bundle);
+    var container = document.getElementById('picker-' + bundle);
     if (!container) return;
     var size = BUNDLE_SIZES[bundle];
 
     var dots = '';
-    for (var d = 0; d < size; d++) dots += '<span class="stepper-dot"></span>';
+    for (var d = 0; d < size; d++) dots += '<span class="picker-dot"></span>';
 
-    var rows = '';
+    var items = '';
     FLAVOR_LIST.forEach(function(f) {
-      rows += '<div class="stepper-row" data-variant="' + f.id + '">' +
-        '<span class="stepper-emoji">' + f.emoji + '</span>' +
-        '<span class="stepper-name">' + f.name + '</span>' +
-        '<div class="stepper-controls">' +
-          '<button class="stepper-btn minus" onclick="stepFlavor(\'' + bundle + '\',\'' + f.id + '\',-1)">−</button>' +
-          '<span class="stepper-count">0</span>' +
-          '<button class="stepper-btn plus" onclick="stepFlavor(\'' + bundle + '\',\'' + f.id + '\',1)">+</button>' +
-        '</div>' +
-      '</div>';
+      var imgUrl = FLAVOR_IMAGES[f.id] || '';
+      items +=
+        '<div class="picker-item" data-variant="' + f.id + '" onclick="toggleFlavor(\'' + bundle + '\',\'' + f.id + '\')">' +
+          '<img class="picker-img" src="' + imgUrl + '" alt="' + f.name + '" loading="lazy">' +
+          '<div class="picker-check">✓</div>' +
+          '<div class="picker-label">' + f.emoji + ' ' + f.name + '</div>' +
+        '</div>';
     });
 
     container.innerHTML =
-      '<div class="stepper-progress-bar">' +
-        '<span class="stepper-progress-text">0 von ' + size + ' gewählt</span>' +
-        '<div class="stepper-dots">' + dots + '</div>' +
+      '<div class="picker-progress">' +
+        '<span class="picker-progress-text">0 von ' + size + ' gewählt</span>' +
+        '<div class="picker-dots">' + dots + '</div>' +
       '</div>' +
-      '<div class="stepper-rows">' + rows + '</div>';
+      '<div class="picker-grid">' + items + '</div>';
 
-    updateStepperUI(bundle);
+    updatePickerUI(bundle);
   });
 }
 
-buildSteppers();
+buildPickers();
 
 function addToCart(bundleSize) {
   const state = flavorState[bundleSize] || {};
