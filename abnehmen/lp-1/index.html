@@ -4,7 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Heißhunger besiegen</title>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&display=swap" onload="this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&display=swap"></noscript>
+<link rel="preload" as="image" href="../../assets/rabatt.webp">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -439,7 +443,7 @@ src="https://www.facebook.com/tr?id=458434359587251&ev=PageView&noscript=1"/></n
 
 <!-- HEADER -->
 <header class="site-header">
-  <div class="logo-text">    <img src="../../assets/logo.png" style="width:40%"></div>
+  <div class="logo-text">    <img src="../../assets/logo.webp" style="width:40%" loading="lazy" decoding="async"></div>
   <div class="badge-offer">LESERANGEBOT</div>
 </header>
 
@@ -448,8 +452,8 @@ src="https://www.facebook.com/tr?id=458434359587251&ev=PageView&noscript=1"/></n
   <!-- Hero Bild -->
   <div class="hero-img-container">
     <picture>
-      <source media="(min-width: 900px)" srcset="../../assets/lifestyle.jpeg">
-      <img src="../../assets/rabatt.png" alt="Geschmacksbombe Bundle" class="hero-img">
+      <source media="(min-width: 900px)" srcset="../../assets/lifestyle.webp">
+      <img src="../../assets/rabatt.webp" alt="Geschmacksbombe Bundle" class="hero-img" fetchpriority="high">
     </picture>
   </div>
   
@@ -487,22 +491,22 @@ src="https://www.facebook.com/tr?id=458434359587251&ev=PageView&noscript=1"/></n
       <div class="slider-main">
         <!-- ERSETZE diese Pfade mit deinen echten Bildern -->
         <div class="slider-slide active">
-          <img src="../../assets/product_image.jpeg" alt="Geschmacksbombe Blaubeere" class="slider-img">
+          <img src="../../assets/product_image.webp" alt="Geschmacksbombe Blaubeere" class="slider-img" decoding="async">
         </div>
         <div class="slider-slide">
-          <img src="../../assets/action.jpeg" alt="Geschmacksbombe Vanille" class="slider-img">
+          <img src="../../assets/action.webp" alt="Geschmacksbombe Vanille" class="slider-img" loading="lazy" decoding="async">
         </div>
         <div class="slider-slide">
-          <img src="../../assets/Zutaten.jpeg" alt="Geschmacksbombe Erdbeere" class="slider-img">
+          <img src="../../assets/Zutaten.webp" alt="Geschmacksbombe Erdbeere" class="slider-img" loading="lazy" decoding="async">
         </div>
       </div>
     </div>
 
     <!-- Thumbnail Navigation -->
     <div class="slider-thumbs">
-      <img src="../../assets/product_image.jpeg" alt="Thumbnail 1" class="slider-thumb active" onclick="goToSlide(0)">
-      <img src="../../assets/action.jpeg" alt="Thumbnail 2" class="slider-thumb" onclick="goToSlide(1)">
-      <img src="../../assets/Zutaten.jpeg" alt="Thumbnail 3" class="slider-thumb" onclick="goToSlide(2)">
+      <img src="../../assets/product_image.webp" alt="Thumbnail 1" class="slider-thumb active" onclick="goToSlide(0)" loading="lazy" decoding="async">
+      <img src="../../assets/action.webp" alt="Thumbnail 2" class="slider-thumb" onclick="goToSlide(1)" loading="lazy" decoding="async">
+      <img src="../../assets/Zutaten.webp" alt="Thumbnail 3" class="slider-thumb" onclick="goToSlide(2)" loading="lazy" decoding="async">
     </div>
   </div>
 </section>
@@ -632,7 +636,7 @@ src="https://www.facebook.com/tr?id=458434359587251&ev=PageView&noscript=1"/></n
     <h3 style="font-size:18px;font-weight:800;text-align:center;margin-bottom:18px;">Warum Verzicht und Willenskraft ab 40 nicht mehr ausreichen</h3>
     <!-- BILD: Hormongrafik -->
     <div style="text-align:center; margin: 20px 0;">
-      <img src="../../assets/grafik_kreislauf.jpeg"
+      <img src="../../assets/grafik_kreislauf.webp"
            alt="Grafik: Heißhunger-Kreislauf bei Diät"
            style="max-width:100%; height:auto; border-radius:12px;">
     </div>
@@ -718,7 +722,7 @@ src="https://www.facebook.com/tr?id=458434359587251&ev=PageView&noscript=1"/></n
     <h2 class="h2 h2-center">Sieh zu, wie dein Heißhunger auf Süßes mit der Geschmacksbombe Schritt für Schritt verschwindet.</h2>
     <!-- BILD: Before/After Foto -->
    <div style="text-align:center; margin: 20px 0;">
-  <img src="../../assets/progression.jpeg"
+  <img src="../../assets/progression.webp"
        alt="Fortschrittsfotos: Abnehmen mit Geschmacksbombe"
        style="max-width:100%; height:auto; border-radius:12px;">
 </div>
@@ -739,10 +743,10 @@ src="https://www.facebook.com/tr?id=458434359587251&ev=PageView&noscript=1"/></n
     <h2 class="h2 h2-center">Das Rezeptbuch – damit wird die Geschmacksbombe zum System</h2>
     <p style="text-align:center;color:var(--text-body);margin:16px 0 8px;">Kein separater Einkauf, kein Rätselraten. Mit dem Rezeptbuch kannst du sofort loslegen: Lieblingsdesserts, Backrezepte, herzhafte Gerichte – alle mit der Geschmacksbombe nachgekocht. Zucker raus, Geschmack rein, Gewissen frei.</p>
     <p style="text-align:center;color:var(--text-body);margin:0 0 24px;">Das Rezeptbuch erhältst du als <strong>PDF – direkt auf dein Handy oder Tablet</strong>. Kein Warten, kein Versand. Du kannst schon beim ersten Paketöffnen reinschauen und direkt loslegen.</p>
-    <img src="../../assets/highlights.jpeg" alt="Rezeptbuch Highlights" style="width:100%;border-radius:14px;object-fit:cover;margin-bottom:12px;display:block;">
+    <img src="../../assets/highlights.webp" alt="Rezeptbuch Highlights" style="width:100%;border-radius:14px;object-fit:cover;margin-bottom:12px;display:block;" loading="lazy" decoding="async">
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-      <img src="../../assets/beispiele_rezeptbuch.png" alt="Rezeptbeispiele" style="width:100%;border-radius:14px;object-fit:cover;display:block;">
-      <img src="../../assets/aufgeklappt.jpeg" alt="Rezeptbuch aufgeklappt" style="width:100%;border-radius:14px;object-fit:cover;display:block;">
+      <img src="../../assets/beispiele_rezeptbuch.webp" alt="Rezeptbeispiele" style="width:100%;border-radius:14px;object-fit:cover;display:block;" loading="lazy" decoding="async">
+      <img src="../../assets/aufgeklappt.webp" alt="Rezeptbuch aufgeklappt" style="width:100%;border-radius:14px;object-fit:cover;display:block;" loading="lazy" decoding="async">
     </div>
   </div>
 </section>
@@ -768,7 +772,7 @@ src="https://www.facebook.com/tr?id=458434359587251&ev=PageView&noscript=1"/></n
       </div>
       <div class="bundle-cols">
         <div class="bundle-image-wrapper">
-          <img src="../../assets/bundle-1.jpeg" alt="2er-Set Geschmacksbombe" class="bundle-image">
+          <img src="../../assets/bundle-1.webp" alt="2er-Set Geschmacksbombe" class="bundle-image" loading="lazy" decoding="async">
         </div>
         <div class="bundle-body">
           <ul class="bundle-includes">
@@ -793,7 +797,7 @@ src="https://www.facebook.com/tr?id=458434359587251&ev=PageView&noscript=1"/></n
       </div>
       <div class="bundle-cols">
         <div class="bundle-image-wrapper">
-          <img src="../../assets/bundle-2-pink.jpeg" alt="4er-Set Geschmacksbombe" class="bundle-image">
+          <img src="../../assets/bundle-2-pink.webp" alt="4er-Set Geschmacksbombe" class="bundle-image" loading="lazy" decoding="async">
         </div>
         <div class="bundle-body">
           <ul class="bundle-includes">
@@ -821,7 +825,7 @@ src="https://www.facebook.com/tr?id=458434359587251&ev=PageView&noscript=1"/></n
       </div>
       <div class="bundle-cols">
         <div class="bundle-image-wrapper">
-          <img src="../../assets/bundle-3-pink.jpeg" alt="6er-Set Geschmacksbombe" class="bundle-image">
+          <img src="../../assets/bundle-3-pink.webp" alt="6er-Set Geschmacksbombe" class="bundle-image" loading="lazy" decoding="async">
         </div>
         <div class="bundle-body">
           <ul class="bundle-includes">
@@ -1157,7 +1161,7 @@ src="https://www.facebook.com/tr?id=458434359587251&ev=PageView&noscript=1"/></n
   border-radius: 50%;
   border: 2.5px solid white;
   overflow: hidden;
-  margin-left: -8px;
+  margin-left: -10px;
   background: #e2ddf5;
   display: flex;
   align-items: center;
@@ -1168,6 +1172,11 @@ src="https://www.facebook.com/tr?id=458434359587251&ev=PageView&noscript=1"/></n
   transition: transform 0.15s;
 }
 .preview-circle:first-child { margin-left: 0; }
+@media (max-width: 480px) {
+  .preview-circle { width: 28px; height: 28px; margin-left: -12px; font-size: 13px; }
+  .preview-circle.bonus { font-size: 11px; }
+  .preview-circle:first-child { margin-left: 0; }
+}
 .preview-circle img {
   width: 100%;
   height: 100%;
@@ -1676,7 +1685,7 @@ function goToSlide(index) {
 
 <!-- FOOTER -->
 <footer class="footer">
-    <img src="../../assets/logo.png" style="width:30%">
+    <img src="../../assets/logo.webp" style="width:30%" loading="lazy" decoding="async">
   <div class="footer-disc">Disclaimer: Dieser Artikel dient ausschließlich der Information und Unterhaltung. Beschriebene Kundenstimmen oder Erfahrungsberichte können exemplarisch sein. Die dargestellten Inhalte ersetzen keine ärztliche Beratung und stellen kein Heilversprechen dar. Alle Hinweise zu möglichen Wirkungen beziehen sich auf allgemein bekannte, wissenschaftlich beschriebene Eigenschaften einzelner Inhaltsstoffe. Individuelle Ergebnisse können variieren. Es handelt sich bei diesem Artikel um ein Advertorial, welches Affiliate-Links enthalten kann.</div>
   <div class="footer-links"><a href="https://thefitprotocol.de/impressum/">Impressum</a><a href="https://thefitprotocol.de/datenschutz/">Datenschutz</a></div>
 </footer>
