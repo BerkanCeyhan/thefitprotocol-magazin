@@ -380,8 +380,9 @@ body{font-family:'Nunito',sans-serif;background:var(--white);color:var(--text);f
   .guar-items{flex-direction:row;max-width:none;align-items:flex-start;gap:24px}
   .guar-item{flex:1}
 
-  /* BUNDLE CARDS – 3 Spalten */
-  .bundle-cards-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;align-items:start}
+  /* BUNDLE CARDS – 3 Spalten, größerer Container */
+  #bundle-selector .inner { max-width: 1320px; }
+  .bundle-cards-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;align-items:start}
   .bundle-selector-card{margin-bottom:0}
 
   /* TEAM – 2×2 Raster (Trenner ausgeblendet) */
@@ -1298,7 +1299,8 @@ src="https://www.facebook.com/tr?id=458434359587251&ev=PageView&noscript=1"/></n
 }
 /* Desktop: mehr Spalten im Grid */
 @media (min-width: 768px) {
-  .picker-grid { grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .picker-grid { grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .picker-label { font-size: 12px; padding: 6px 5px 7px; }
 }
 .bundle-savings {
   text-align: center;
