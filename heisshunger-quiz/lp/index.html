@@ -380,10 +380,13 @@ body{font-family:'Nunito',sans-serif;background:var(--white);color:var(--text);f
   .guar-items{flex-direction:row;max-width:none;align-items:flex-start;gap:24px}
   .guar-item{flex:1}
 
-  /* BUNDLE CARDS – 3 Spalten, größerer Container */
-  #bundle-selector .inner { max-width: 1320px; }
-  .bundle-cards-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;align-items:start}
-  .bundle-selector-card{margin-bottom:0}
+  /* BUNDLE CARDS – 1 Spalte, horizontal Layout */
+  #bundle-selector .inner { max-width: 1100px; }
+  .bundle-cards-grid { display: flex; flex-direction: column; gap: 28px; }
+  .bundle-selector-card { margin-bottom: 0; }
+  .bundle-cols { flex-direction: row; align-items: flex-start; gap: 32px; }
+  .bundle-image-wrapper { width: 300px; flex-shrink: 0; margin-bottom: 0; }
+  .bundle-body { flex: 1; min-width: 0; padding: 20px 24px 20px 0; }
 
   /* TEAM – 2×2 Raster (Trenner ausgeblendet) */
   .team-wrapper{max-width:960px !important;display:grid;grid-template-columns:1fr 1fr;gap:40px 56px;align-items:start}
@@ -810,16 +813,18 @@ src="https://www.facebook.com/tr?id=458434359587251&ev=PageView&noscript=1"/></n
           <span class="price-main">€29,95</span>
         </div>
       </div>
-      <div class="bundle-body">
-         <div class="bundle-image-wrapper">
-    <img src="../../assets/bundle-1.jpeg" alt="2er-Set Geschmacksbombe" class="bundle-image">
-  </div>
-  <ul class="bundle-includes">
-  <li><div class="chk-blue">✓</div><span class="inc-label">2x Geschmacksbombe<span class="val-pink">(Wert: 31,8€)</span></span></li>
-  <li><div class="chk-blue">✓</div><span class="inc-label">Versandkosten<span class="val-pink">4,99€</span></span></li>
-</ul>
-        <div id="picker-2er" class="flavor-picker"></div>
-        <button class="btn btn-center" onclick="addToCart('2er')">JETZT HEIßHUNGER BESIEGEN</button>
+      <div class="bundle-cols">
+        <div class="bundle-image-wrapper">
+          <img src="../../assets/bundle-1.jpeg" alt="2er-Set Geschmacksbombe" class="bundle-image">
+        </div>
+        <div class="bundle-body">
+          <ul class="bundle-includes">
+            <li><div class="chk-blue">✓</div><span class="inc-label">2x Geschmacksbombe<span class="val-pink">(Wert: 31,8€)</span></span></li>
+            <li><div class="chk-blue">✓</div><span class="inc-label">Versandkosten<span class="val-pink">4,99€</span></span></li>
+          </ul>
+          <div id="picker-2er" class="flavor-picker"></div>
+          <button class="btn btn-center" onclick="addToCart('2er')">JETZT HEIßHUNGER BESIEGEN</button>
+        </div>
       </div>
     </div>
 
@@ -833,20 +838,22 @@ src="https://www.facebook.com/tr?id=458434359587251&ev=PageView&noscript=1"/></n
           <span class="price-main">€63,60</span>
         </div>
       </div>
-      <div class="bundle-body">
-          <div class="bundle-image-wrapper">
-    <img src="../../assets/bundle-2-pink.jpeg" alt="4er-Set Geschmacksbombe" class="bundle-image">
-  </div>
-    <ul class="bundle-includes">
-  <li><div class="chk-blue">✓</div><span class="inc-label">4x Geschmacksbombe<span class="val-pink">(Wert: 63,60€)</span></span></li>
-  <li><div class="chk-blue">✓</div><span class="inc-label">1x Rezeptbuch (47 Rezepte)<span class="val-pink">GRATIS (Wert 24,90€)</span></span></li>
-  <li><div class="chk-blue">✓</div><span class="inc-label">1x Premium Shaker<span class="val-pink">GRATIS (Wert 9,90€)</span></span></li>
-  <li><div class="chk-blue">✓</div><span class="inc-label">Premium Versand<span class="val-pink">GRATIS (Wert: 4,99€)</span></span></li>
-  <li><span class="inc-label">🎁 + 2 ZUFÄLLIGE PROBEN<span class="val-pink">GRATIS</span></span></li>
-</ul>
-        <div id="picker-4er" class="flavor-picker"></div>
-        <button class="btn btn-center" onclick="addToCart('4er')">JETZT HEIßHUNGER BESIEGEN</button>
-        <p class="bundle-savings">Du sparst €39,79 + Gratis Versand</p>
+      <div class="bundle-cols">
+        <div class="bundle-image-wrapper">
+          <img src="../../assets/bundle-2-pink.jpeg" alt="4er-Set Geschmacksbombe" class="bundle-image">
+        </div>
+        <div class="bundle-body">
+          <ul class="bundle-includes">
+            <li><div class="chk-blue">✓</div><span class="inc-label">4x Geschmacksbombe<span class="val-pink">(Wert: 63,60€)</span></span></li>
+            <li><div class="chk-blue">✓</div><span class="inc-label">1x Rezeptbuch (47 Rezepte)<span class="val-pink">GRATIS (Wert 24,90€)</span></span></li>
+            <li><div class="chk-blue">✓</div><span class="inc-label">1x Premium Shaker<span class="val-pink">GRATIS (Wert 9,90€)</span></span></li>
+            <li><div class="chk-blue">✓</div><span class="inc-label">Premium Versand<span class="val-pink">GRATIS (Wert: 4,99€)</span></span></li>
+            <li><span class="inc-label">🎁 + 2 ZUFÄLLIGE PROBEN<span class="val-pink">GRATIS</span></span></li>
+          </ul>
+          <div id="picker-4er" class="flavor-picker"></div>
+          <button class="btn btn-center" onclick="addToCart('4er')">JETZT HEIßHUNGER BESIEGEN</button>
+          <p class="bundle-savings">Du sparst €39,79 + Gratis Versand</p>
+        </div>
       </div>
     </div>
 
@@ -859,20 +866,22 @@ src="https://www.facebook.com/tr?id=458434359587251&ev=PageView&noscript=1"/></n
           <span class="price-main">€95,40</span>
         </div>
       </div>
-      <div class="bundle-body">
-          <div class="bundle-image-wrapper">
-    <img src="../../assets/bundle-3-pink.jpeg" alt="6er-Set Geschmacksbombe" class="bundle-image">
-  </div>
-  <ul class="bundle-includes">
-  <li><div class="chk-blue">✓</div><span class="inc-label">6x Geschmacksbombe<span class="val-pink">(Wert: 95,40€)</span></span></li>
-  <li><div class="chk-blue">✓</div><span class="inc-label">1x Rezeptbuch (47 Rezepte)<span class="val-pink">GRATIS (Wert: 24,90€)</span></span></li>
-  <li><div class="chk-blue">✓</div><span class="inc-label">1x Premium Shaker<span class="val-pink">GRATIS (Wert: 9,90€)</span></span></li>
-  <li><div class="chk-blue">✓</div><span class="inc-label">Premium Versand<span class="val-pink">GRATIS (Wert: 4,99€)</span></span></li>
-  <li><span class="inc-label">🎁 + 2 ZUFÄLLIGE PROBEN<span class="val-pink">GRATIS</span></span></li>
-</ul>
-        <div id="picker-6er" class="flavor-picker"></div>
-        <button class="btn btn-center" onclick="addToCart('6er')">JETZT HEIßHUNGER BESIEGEN</button>
-        <p class="bundle-savings">Du sparst €37,29 + Gratis Versand</p>
+      <div class="bundle-cols">
+        <div class="bundle-image-wrapper">
+          <img src="../../assets/bundle-3-pink.jpeg" alt="6er-Set Geschmacksbombe" class="bundle-image">
+        </div>
+        <div class="bundle-body">
+          <ul class="bundle-includes">
+            <li><div class="chk-blue">✓</div><span class="inc-label">6x Geschmacksbombe<span class="val-pink">(Wert: 95,40€)</span></span></li>
+            <li><div class="chk-blue">✓</div><span class="inc-label">1x Rezeptbuch (47 Rezepte)<span class="val-pink">GRATIS (Wert: 24,90€)</span></span></li>
+            <li><div class="chk-blue">✓</div><span class="inc-label">1x Premium Shaker<span class="val-pink">GRATIS (Wert: 9,90€)</span></span></li>
+            <li><div class="chk-blue">✓</div><span class="inc-label">Premium Versand<span class="val-pink">GRATIS (Wert: 4,99€)</span></span></li>
+            <li><span class="inc-label">🎁 + 2 ZUFÄLLIGE PROBEN<span class="val-pink">GRATIS</span></span></li>
+          </ul>
+          <div id="picker-6er" class="flavor-picker"></div>
+          <button class="btn btn-center" onclick="addToCart('6er')">JETZT HEIßHUNGER BESIEGEN</button>
+          <p class="bundle-savings">Du sparst €37,29 + Gratis Versand</p>
+        </div>
       </div>
     </div>
     </div><!-- /bundle-cards-grid -->
@@ -939,12 +948,15 @@ src="https://www.facebook.com/tr?id=458434359587251&ev=PageView&noscript=1"/></n
   font-weight: 900;
   color: var(--purple);
 }
+.bundle-cols {
+  display: flex;
+  flex-direction: column;
+}
 .bundle-body {
-  padding: 24px 20px;
+  padding: 20px;
 }
 .bundle-image-wrapper {
   width: 100%;
-  margin-bottom: 24px;
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 2px 12px rgba(107,79,187,0.08);
